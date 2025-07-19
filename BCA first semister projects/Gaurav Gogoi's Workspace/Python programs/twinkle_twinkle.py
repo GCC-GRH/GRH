@@ -1,0 +1,2 @@
+print("Twinkle,Twinkle, little star,\n \t How i wonder what you are! \n \t\t Up above the world so high,\n \t\t Like a diamond in the key. \n Twinkle, twinkle, little star, \n\t How i wonder what you are! ")
+#Write a Python program to print the following string in a specific format.
