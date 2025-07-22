@@ -1,0 +1,6 @@
+value=input("Enter your string: ")
+print(value.endswith(input("Enter a value to check if your existing string ends with that: ")))
+print(value.capitalize())
+print(value.replace(input("Which value are you looking to replace? \n"),input("Replace with: ")))
+print(value.find(input("Which value are you finding? \n")))
+print(value.count(input("Which value are you willing to count in the string? \n")))
