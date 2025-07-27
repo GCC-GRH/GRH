@@ -13,4 +13,5 @@ print(numbers)
 print(type(numbers))
 
 #How to Declare an empty set?
-#null_set=set() we cannot use null_set={} as it will result in an empty dictionary
+null_set=set() #we cannot use null_set={} as it will result in an empty dictionary
+print(null_set)
