@@ -1,0 +1,80 @@
+.hero {
+    padding: 8rem 2rem 4rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: #0A0A0F;
+}
+
+.hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    z-index: 1;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: clamp(3rem, 10vw, 7rem);
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.hero-text-top {
+    display: block;
+    font-size: 1.5rem;
+    color: #fff;
+    opacity: 0.8;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.typing-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 1.2em;
+    margin-top: 1rem;
+    width: 100%;
+    overflow: visible;
+}
+
+.typing-text,
+.hero-content h1 .typing-text,
+.hero-content h1 div .typing-text,
+body .hero-content h1 div .typing-text {
+    display: inline-block !important;
+    font-size: inherit !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: white !important;
+    -webkit-text-fill-color: white !important;
+    background: none !important;
+    background-clip: initial !important;
+    -webkit-background-clip: initial !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+}
+
+.cursor,
+.hero-content h1 .cursor,
+.hero-content h1 div .cursor,
+body .hero-content h1 div .cursor {
+    display: inline !important;
+    margin-left: 2px !important;
+    animation: blink 1s infinite !important;
+    color: white !important;
+    -webkit-text-fill-color: white !important;
+    background: none !important;
+    background-clip: initial !important;
+    -webkit-background-clip: initial !important;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
