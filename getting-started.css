@@ -24,29 +24,43 @@
     color: rgba(255, 255, 255, 0.7);
     font-size: 1rem;
     line-height: 1.5;
-    margin-bottom: 1.25rem; /* reduced to make room for CTA */
+    margin-bottom: 3rem;
 }
 
-/* Place CTA directly under the paragraph on the left */
-.getting-started .get-started-btn {
-    display: inline-block;
-    padding: 0.75rem 2rem;
-    background: linear-gradient(135deg, #6F4CFF 0%, #FF4C4C 100%);
-    color: white;
+.get-started-btn {
+    /* Thin gradient outline, dark interior — unified site-wide */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 1.2rem;
+    border-radius: 28px;
+    border: 2px solid transparent;
+    background-image: linear-gradient(#0A0A0F, #0A0A0F),
+                      linear-gradient(90deg, #6F4CFF 0%, #FF6A84 50%, #FF4C4C 100%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    color: #ffffff;
     text-decoration: none;
-    border-radius: 2rem;
-    border: none;
-    transition: all 0.3s ease;
-    font-weight: 500;
+    font-size: 0.98rem;
+    font-weight: 400;
+    font-family: inherit;
+    white-space: nowrap;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.45);
 }
 
-.getting-started .get-started-btn:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
+.get-started-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.55);
 }
 
-/* Remove obsolete wrapper styles */
-/* .get-started-wrapper { removed } */
+@media (max-width: 768px) {
+    .get-started-btn {
+        padding: 0.34rem 0.9rem;
+        border-radius: 22px;
+        font-size: 0.92rem;
+    }
+}
 
 .steps-container {
     display: flex;
@@ -69,16 +83,9 @@
 }
 
 .step-card::before {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 45%;
-    height: 100%;
-    background: linear-gradient(135deg, 
-        rgba(111, 76, 255, 0.1) 0%, 
-        rgba(255, 76, 76, 0.1) 100%);
-    pointer-events: none;
+    /* Decorative overlay removed for a uniform background */
+    content: none;
+    display: none;
 }
 
 .step-number {
@@ -129,6 +136,20 @@
     align-items: center;
     justify-content: center;
     padding: 1.5rem;
+}
+
+/* Step illustration styling: slightly larger and subtle hover pop */
+.glass-card svg {
+    width: 84%;
+    height: auto;
+    max-height: 88%;
+    transform-origin: center center;
+    transition: transform 220ms cubic-bezier(.2,.9,.3,1), opacity 220ms ease;
+    opacity: 0.96;
+}
+.glass-card:hover svg {
+    transform: scale(1.035);
+    opacity: 1;
 }
 
 .glass-card::after {
@@ -239,4 +260,122 @@
     .step-illustration {
         width: 100%;
     }
+}
+
+/* About Us styles */
+.about-us {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+}
+
+.team-card {
+    background: rgba(18,18,23,0.9);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+}
+
+.team-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(111,76,255,0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    color: #8f7bff;
+    margin-bottom: 1rem;
+}
+
+.team-card h4 { margin: 0.5rem 0 0.25rem; }
+.team-card .muted { color: rgba(255,255,255,0.6); font-size: 0.95rem; }
+
+/* Member modal */
+.member-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.6);
+    z-index: 2000;
+}
+
+.member-modal[aria-hidden="false"] { display: flex; }
+
+.member-panel {
+    width: min(760px, 95%);
+    background: rgba(16,16,20,0.98);
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+}
+
+.member-header { display:flex; gap:1rem; align-items:center; }
+.member-avatar { width:72px; height:72px; border-radius:50%; background:rgba(255,255,255,0.06); }
+.member-name { margin:0; }
+.member-role { margin:0; color:rgba(255,255,255,0.7); }
+.member-body { margin-top:1rem; color:rgba(255,255,255,0.85); line-height:1.6; }
+
+.close-member { background:none; border:none; color:rgba(255,255,255,0.9); font-size:1.6rem; position:absolute; right:1.5rem; top:1.2rem; cursor:pointer; }
+
+/* About page specifics */
+.about-hero {
+    padding: 6rem 2rem 8rem;
+    background: transparent;
+}
+
+.about-hero-inner { max-width: 1000px; margin: 0 auto 3rem; text-align: center; }
+.about-hero-inner h1 { font-size: 2.75rem; margin-bottom: 0.5rem; }
+.about-hero-inner p { color: rgba(255,255,255,0.75); }
+
+.team-cards { max-width: 1100px; margin: 0 auto 3rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+.team-card-full { background: rgba(18,18,23,0.9); border-radius: 14px; padding: 2rem; text-align: left; position: relative; }
+.team-card-full .card-top { display:flex; align-items:center; justify-content:space-between; }
+.team-card-full .avatar { width:96px; height:96px; border-radius:12px; background:rgba(255,255,255,0.04); }
+.team-card-full h3 { margin-top: 1rem; margin-bottom:0.5rem; }
+.team-card-full .muted { color:rgba(255,255,255,0.7); }
+.team-card-full .badge { background: linear-gradient(90deg,#6F4CFF 0%, #FF6A84 100%); color:#fff; padding:0.35rem 0.6rem; border-radius:12px; font-size:0.75rem; }
+
+.careers-cta { max-width: 1000px; margin: 0 auto; }
+.cta-card { background: rgba(18,18,23,0.95); border-radius: 18px; padding: 2rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+.cta-card h3 { margin:0; font-size:1.05rem; }
+.cta-card p { margin:0; color:rgba(255,255,255,0.82); max-width: 70%; }
+.cta-card .get-started-btn { margin-left: 2rem; }
+
+/* Ensure CTA wraps nicely on small screens */
+@media (max-width: 640px) {
+    .cta-card { flex-direction: column; align-items:flex-start; }
+    .cta-card p { max-width: 100%; }
+    .cta-card .get-started-btn { margin-left: 0; margin-top: 1rem; }
+}
+
+@media (max-width: 980px) {
+    .team-cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+    .team-cards { grid-template-columns: 1fr; }
+    .cta-card { flex-direction: column; align-items:flex-start; }
 }

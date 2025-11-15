@@ -104,4 +104,42 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = 'auto';
         }
     });
+
+    // About us team modal interactions
+    const teamCards = document.querySelectorAll('.team-card');
+    const memberModal = document.querySelector('.member-modal');
+    const memberName = document.querySelector('.member-name');
+    const memberRole = document.querySelector('.member-role');
+    const memberBio = document.querySelector('.member-bio');
+    const memberAvatar = document.querySelector('.member-avatar');
+    const closeMember = document.querySelector('.close-member');
+
+    teamCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const name = card.getAttribute('data-name');
+            const role = card.getAttribute('data-role');
+            const bio = card.getAttribute('data-bio');
+
+            memberName.textContent = name;
+            memberRole.textContent = role;
+            memberBio.textContent = bio;
+            // Simple avatar placeholder color change based on name hash
+            const colorHash = name.split('').reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+            const hue = colorHash % 360;
+            memberAvatar.style.background = `linear-gradient(135deg, hsl(${hue} 60% 60% / 0.12), rgba(255,255,255,0.06))`;
+
+            memberModal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    function closeModal() {
+        memberModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = 'auto';
+    }
+
+    closeMember.addEventListener('click', closeModal);
+    memberModal.addEventListener('click', (e) => {
+        if (e.target === memberModal) closeModal();
+    });
 });

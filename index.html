@@ -17,12 +17,14 @@
             </div>
             <div class="nav-links">
                 <a href="#home" class="active">Home</a>
-                <a href="#about">About Us</a>
+                <a href="about.html">About Us</a>
                 <a href="#downloads">Downloads</a>
                 <a href="https://github.com/GCC-GRH" target="_blank">Github</a>
+                <!-- mobile-only login button (visible only on small screens) -->
+                <a href="https://github.com/login" class="get-started-btn mobile-only" target="_blank">Login to GitHub</a>
             </div>
         </div>
-        <div class="nav-right">
+        <div class="nav-right desktop-only">
             <a href="https://github.com/login" class="get-started-btn" target="_blank">Login to GitHub</a>
         </div>
         <button class="mobile-nav-toggle" aria-label="Toggle menu">
@@ -97,12 +99,15 @@
 
             <div class="feature-box">
                 <div class="box-icon">
+                    <!-- Monitor/terminal icon to match 'Hacking-ready Cloud PC' -->
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <rect x="3" y="4" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.8"/>
+                        <path d="M8 18h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                        <path d="M10 8l2 2-2 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
-                <h4>Uses GitHub Actions </h4>
-                <p>Seamless integration of GitHub Actions for Desktop deployments to ensure we own nothing personal from your hands</p>
+                <h4>Hacking-ready Cloud PC</h4>
+                <p>A secure, preconfigured cloud PC with essential security and development tooling, ready for research, testing, and learning.</p>
             </div>
 
             <div class="feature-box">
@@ -118,11 +123,12 @@
         </div>
     </section>
 
+    
+
     <section class="getting-started">
         <div class="getting-started-header">
             <h2>How to get started</h2>
-            <p>eget mi proin sed libero enim sed faucibus viverrate maecenas accumsan lacus vel facilisis volutpat viverra maecenas accumsan it.</p>
-            <a href="#" class="get-started-btn">Get started</a>
+            <p>Deploy your workspaces on the cloud using your Github resources through the following steps</p>
         </div>
         
         <div class="steps-container">
@@ -130,15 +136,22 @@
                 <div class="step-number">1</div>
                 <div class="step-content">
                     <h3>Create your account</h3>
-                    <p>Lorem ipsum dolor sit amet, consec adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore elit.</p>
+                    <p>Create or sign in to your GitHub account — you'll use it to deploy and manage your cloud workspaces.</p>
                 </div>
                 <div class="step-illustration">
                     <div class="glass-card">
                         <div class="card-content">
                             <div class="mockup-form">
-                                <div class="mockup-line"></div>
-                                <div class="mockup-line"></div>
-                                <div class="mockup-line"></div>
+                                <!-- User / Login illustration -->
+                                <svg width="120" height="80" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="User sign-in illustration">
+                                    <title>User sign-in</title>
+                                    <rect x="2" y="2" width="116" height="76" rx="8" fill="#1f1b24" stroke="#2b2630"/>
+                                    <circle cx="34" cy="34" r="14" fill="#2f2a33"/>
+                                    <path d="M24 54c4-6 20-6 24 0" stroke="#45404a" stroke-width="2" stroke-linecap="round"/>
+                                    <rect x="66" y="22" width="40" height="18" rx="3" fill="#2f2a33"/>
+                                    <path d="M74 31h24" stroke="#8b7bff" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M74 36h18" stroke="#a67cff" stroke-width="1.2" stroke-linecap="round"/>
+                                </svg>
                             </div>
                         </div>
                     </div>
@@ -148,18 +161,26 @@
             <div class="step-card">
                 <div class="step-number">2</div>
                 <div class="step-content">
-                    <h3>Customize your profile</h3>
-                    <p>Lorem ipsum dolor sit amet, consec adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore elit.</p>
+                    <h3>Choose your workspace</h3>
+                    <p>Pick an OS image and a tooling preset, then deploy with a click — we configure the environment for you.</p>
                 </div>
                 <div class="step-illustration">
                     <div class="glass-card">
                         <div class="card-content">
                             <div class="mockup-profile">
-                                <div class="mockup-avatar"></div>
-                                <div class="mockup-details">
-                                    <div class="mockup-line"></div>
-                                    <div class="mockup-line"></div>
-                                </div>
+                                <!-- Workspace / OS selection illustration -->
+                                <svg width="140" height="80" viewBox="0 0 140 80" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Workspace selection illustration">
+                                    <title>Workspace selection</title>
+                                    <rect x="4" y="6" width="132" height="56" rx="8" fill="#1f1920" stroke="#2b2630"/>
+                                    <rect x="12" y="14" width="108" height="32" rx="4" fill="#2f2931"/>
+                                    <circle cx="26" cy="30" r="4" fill="#8b7bff"/>
+                                    <rect x="36" y="24" width="60" height="12" rx="2" fill="#3a3340"/>
+                                    <g transform="translate(100,26)">
+                                        <circle cx="14" cy="6" r="10" fill="#2f2931"/>
+                                        <path d="M9 6h6" stroke="#a67cff" stroke-width="1.6" stroke-linecap="round"/>
+                                        <path d="M14 2v8" stroke="#a67cff" stroke-width="1.2" stroke-linecap="round"/>
+                                    </g>
+                                </svg>
                             </div>
                         </div>
                     </div>
@@ -169,14 +190,25 @@
             <div class="step-card">
                 <div class="step-number">3</div>
                 <div class="step-content">
-                    <h3>Start earning money</h3>
-                    <p>Lorem ipsum dolor sit amet, consec adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore elit.</p>
+                    <h3>Start your cloud computer</h3>
+                    <p>Start your cloud PC from the dashboard and connect instantly via the browser terminal or your editor to begin coding.</p>
                 </div>
                 <div class="step-illustration">
                     <div class="glass-card">
                         <div class="card-content">
                             <div class="mockup-graph">
-                                <div class="graph-line"></div>
+                                <!-- Terminal / Start illustration -->
+                                <svg width="140" height="80" viewBox="0 0 140 80" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Start cloud computer illustration">
+                                    <title>Start cloud computer</title>
+                                    <rect x="4" y="6" width="132" height="56" rx="8" fill="#1f1920" stroke="#2b2630"/>
+                                    <rect x="12" y="14" width="96" height="28" rx="4" fill="#2f2931"/>
+                                    <path d="M18 26h36" stroke="#7f7bff" stroke-width="1.6" stroke-linecap="round"/>
+                                    <path d="M18 32h18" stroke="#6f6b7f" stroke-width="1.2" stroke-linecap="round"/>
+                                    <g transform="translate(112,22)">
+                                        <rect x="0" y="0" width="20" height="20" rx="4" fill="#a67cff"/>
+                                        <path d="M8 6l6 4-6 4V6z" fill="#1b1720"/>
+                                    </g>
+                                </svg>
                             </div>
                         </div>
                     </div>
@@ -185,5 +217,68 @@
         </div>
     </section>
     
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-columns">
+                <div class="footer-col">
+                    <h5 class="footer-title">Pages</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#downloads">Downloads</a></li>
+                        <li><a href="https://github.com/GCC-GRH" target="_blank">Github</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5 class="footer-title">Utility Pages</h5>
+                    <ul class="footer-links">
+                        <li><a href="#start">Start Here</a></li>
+                        <li><a href="#style-guide">Style Guide</a></li>
+                        <li><a href="#404">404 Not Found</a></li>
+                        <li><a href="#licenses">Licenses</a></li>
+                        <li><a href="#changelog">Changelog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col footer-subscribe">
+                    <h5 class="footer-title">Subscribe to our newsletter</h5>
+                    <p class="footer-text">Get the latest updates on cloud workstations, releases, and roadmap.</p>
+                    <form class="subscribe-form" onsubmit="return false;">
+                        <input type="email" class="footer-input" placeholder="Your email address" aria-label="Your email address">
+                        <button class="get-started-btn footer-btn" type="submit">Get started</button>
+                    </form>
+                    <div class="footer-socials">
+                        <a href="#" class="social-btn" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 8h2V5h-2c-2.2 0-4 1.8-4 4v2H8v3h2v5h3v-5h2.2l.8-3H13V9c0-.6.4-1 1-1z" fill="#fff"/></svg>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 7.5a5.5 5.5 0 01-2 .8 3.2 3.2 0 00-5.5 2v.7A8.9 8.9 0 055 7.4s-2 4.9 3.4 7.2a8 8 0 01-4.6 1.3c5.4 3.1 12.1.3 13.3-6.4a3.2 3.2 0 00-.1-.8z" fill="#fff"/></svg>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="5" width="14" height="14" rx="4" stroke="#fff"/><circle cx="12" cy="12" r="3.5" stroke="#fff"/><circle cx="17" cy="7" r="1" fill="#fff"/></svg>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="16" height="16" rx="2" stroke="#fff"/><rect x="7" y="10" width="2" height="6" fill="#fff"/><circle cx="8" cy="7" r="1" fill="#fff"/><path d="M12 10h2a3 3 0 013 3v3h-3v-3c0-.6-.4-1-1-1h-1v4h-2v-6z" fill="#fff"/></svg>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="YouTube">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="7" width="16" height="10" rx="3" stroke="#fff"/><path d="M11 10l4 2-4 2v-4z" fill="#fff"/></svg>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="WhatsApp">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5a7 7 0 00-6.1 10.3L5 19l3.7-.9A7 7 0 1012 5zm0 12a5 5 0 110-10 5 5 0 010 10z" fill="#fff"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <div class="footer-brand">
+                    <span class="footer-logo"></span>
+                    <span class="footer-brand-name">LoudWave</span>
+                </div>
+                <div class="footer-copy">Copyright © LoudWave | Designed by LoudWave | Powered by GitHub</div>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>

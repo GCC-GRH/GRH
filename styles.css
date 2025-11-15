@@ -6,13 +6,16 @@
 }
 
 body {
-    background: #0A0A0F;
+    /* Use a uniform dark background so section overlays look consistent */
+    background-color: #0A0A0F;
+    background-image: none;
+    background-repeat: no-repeat;
+    background-size: auto;
     color: #fff;
     position: relative;
     overflow-x: hidden;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.5;
-    background: radial-gradient(100% 100% at 50% 0%, rgba(130, 71, 229, 0.2) 0%, rgba(76, 0, 255, 0.05) 52.6%, rgba(10, 10, 15, 0) 100%);
 }
 
 .navbar {
@@ -138,7 +141,7 @@ body {
 }
 
 .mobile-only {
-    display: none;
+    display: none !important;
 }
 
     @media (max-width: 768px) {
@@ -171,7 +174,7 @@ body {
     }
 
     .mobile-only {
-        display: block;
+        display: inline-block !important;
     }
 
     .nav-brand {
@@ -250,33 +253,14 @@ body {
     text-align: center;
     padding: 120px 2rem 6rem;
     overflow: hidden;
-    background: radial-gradient(100% 100% at 50% 0%, rgba(130, 71, 229, 0.2) 0%, rgba(76, 0, 255, 0.05) 52.6%, rgba(10, 10, 15, 0) 100%);
+    background: transparent;
 }
 
-.hero::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(130, 71, 229, 0.1) 0%, rgba(130, 71, 229, 0) 50%);
-    z-index: 0;
-    pointer-events: none;
-    transform: rotate(-45deg);
-}
-
+.hero::before,
 .hero::after {
-    content: "";
-    position: absolute;
-    bottom: -30%;
-    left: -30%;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(76, 0, 255, 0.1) 0%, rgba(76, 0, 255, 0) 50%);
-    z-index: 0;
-    pointer-events: none;
-    transform: rotate(45deg);
+    /* Remove decorative radial glows so the page background remains uniform */
+    content: none;
+    display: none;
 }
 
 .hero-content {
@@ -380,50 +364,20 @@ body .hero-content h1 div .cursor {
     50% { opacity: 0; }
 }
 
-.hero-images {
-    margin-top: 3rem;
-}
+.hero-images { display: none; }
 
-.hero-img-1, .hero-img-2 {
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
-    background: rgba(30, 30, 30, 0.95);
-}
+.hero-img-1, .hero-img-2 { display: none; }
 
 /* Features Section */
 .features {
     padding: 6rem 2rem;
-    background: radial-gradient(100% 100% at 50% 0%, rgba(130, 71, 229, 0.2) 0%, rgba(76, 0, 255, 0.05) 52.6%, rgba(10, 10, 15, 0) 100%);
+    background: transparent;
     position: relative;
     overflow: hidden;
 }
 
-.features::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(130, 71, 229, 0.1) 0%, rgba(130, 71, 229, 0) 50%);
-    z-index: 0;
-    pointer-events: none;
-    transform: rotate(-45deg);
-}
-
-.features::after {
-    content: "";
-    position: absolute;
-    bottom: -30%;
-    left: -30%;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(76, 0, 255, 0.1) 0%, rgba(76, 0, 255, 0) 50%);
-    z-index: 0;
-    pointer-events: none;
-    transform: rotate(45deg);
-}
+/* Removed features glows to avoid visual banding; body gradient provides uniformity */
+.features::before, .features::after { content: none; display: none; }
 
 .features-header {
     text-align: center;
@@ -523,7 +477,7 @@ body .hero-content h1 div .cursor {
 .dot:nth-child(3) { background: #28C840; }
 
 .window-content {
-    background: linear-gradient(180deg, rgba(111, 76, 255, 0.05) 0%, rgba(111, 76, 255, 0) 100%);
+    background: transparent;
     overflow: hidden;
     padding: 0;
 }
@@ -546,17 +500,8 @@ body .hero-content h1 div .cursor {
 }
 
 .code-editor::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(90deg, 
-        rgba(111, 76, 255, 0.1) 0%, 
-        rgba(111, 76, 255, 0.05) 50%,
-        rgba(111, 76, 255, 0) 100%
-    );
+    content: none;
+    display: none;
 }
 
 .feature-boxes {
@@ -603,35 +548,15 @@ body .hero-content h1 div .cursor {
 /* Getting Started Section */
 .getting-started {
     padding: 6rem 2rem;
-    background: radial-gradient(100% 100% at 50% 0%, rgba(130, 71, 229, 0.2) 0%, rgba(76, 0, 255, 0.05) 52.6%, rgba(10, 10, 15, 0) 100%);
+    background: transparent;
     position: relative;
     overflow: hidden;
 }
 
-.getting-started::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(130, 71, 229, 0.1) 0%, rgba(130, 71, 229, 0) 50%);
-    z-index: 0;
-    pointer-events: none;
-    transform: rotate(-45deg);
-}
-
+.getting-started::before,
 .getting-started::after {
-    content: "";
-    position: absolute;
-    bottom: -30%;
-    left: -30%;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(76, 0, 255, 0.1) 0%, rgba(76, 0, 255, 0) 50%);
-    z-index: 0;
-    pointer-events: none;
-    transform: rotate(45deg);
+    content: none;
+    display: none;
 }
 
 .steps-container {
@@ -725,12 +650,12 @@ body .hero-content h1 div .cursor {
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
-    box-shadow: 0 4px 20px rgba(111, 76, 255, 0.3);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
 }
 
 .get-started-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 25px rgba(111, 76, 255, 0.4);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.65);
 }
 
 @media (max-width: 992px) {
@@ -790,13 +715,11 @@ body .hero-content h1 div .cursor {
 
 body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background-color: #13111C;
-    min-height: 200vh; /* Temporary - just to show scrolling */
 }
 
 /* Visibility utilities */
 .mobile-only {
-    display: none;
+    display: none !important;
 }
 
 @media (max-width: 768px) {
@@ -948,6 +871,28 @@ body {
     transform: translateY(-1px);
 }
 
+/* Slightly larger border on desktop for a clearer outline; scale down on small screens */
+@media (max-width: 768px) {
+    .get-started-btn {
+        padding: clamp(0.5rem, 0.5vw + 0.25rem, 0.625rem) clamp(1rem, 1vw + 0.5rem, 1.5rem);
+        border-radius: 100px;
+        font-size: 0.95rem;
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0 0, 0% 50%;
+    }
+    50% {
+        background-position: 0 0, 100% 50%;
+    }
+    100% {
+        background-position: 0 0, 0% 50%;
+    }
+}
+
+
 /* Responsive Styles */
 @media (max-width: 1024px) {
     .navbar {
@@ -1083,34 +1028,12 @@ body {
     width: 100%;
     position: relative;
     overflow: hidden;
-    background: radial-gradient(100% 100% at 50% 0%, rgba(130, 71, 229, 0.2) 0%, rgba(76, 0, 255, 0.05) 52.6%, rgba(10, 10, 15, 0) 100%);
+    background: transparent;
 }
 
-.hero::before {
-    content: '';
-    position: absolute;
-    top: -30%;
-    right: -30%;
-    width: 80%;
-    height: 80%;
-    background: radial-gradient(circle, rgba(130, 71, 229, 0.1) 0%, rgba(130, 71, 229, 0) 50%);
-    z-index: 0;
-    pointer-events: none;
-    transform: rotate(-45deg);
-}
-
-.hero::after {
-    content: '';
-    position: absolute;
-    bottom: -20%;
-    left: -20%;
-    width: 80%;
-    height: 80%;
-    background: radial-gradient(circle, rgba(76, 0, 255, 0.1) 0%, rgba(76, 0, 255, 0) 50%);
-    z-index: 0;
-    pointer-events: none;
-    transform: rotate(45deg);
-}
+/* Removed hero glow overlays to keep uniform background */
+.hero::before { display: none; content: none; }
+.hero::after { display: none; content: none; }
 
 .hero-content {
     text-align: center;
@@ -1161,40 +1084,10 @@ body {
     transform: translateY(-1px);
 }
 
-.hero-images {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    position: relative;
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
-    padding: 0 1rem;
-}
-
-.image-left, .image-right {
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-.image-left {
-    width: 45%;
-    max-width: 500px;
-    transform: translateY(-2rem);
-}
-
-.image-right {
-    width: 35%;
-    max-width: 400px;
-    transform: translateY(2rem);
-}
-
-.hero-img-1, .hero-img-2 {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+/* Removed hero image layout since images were removed */
+.hero-images { display: none; }
+.image-left, .image-right { display: none; }
+.hero-img-1, .hero-img-2 { display: none; }
 
 /* Responsive styles for hero section */
 @media (max-width: 768px) {
@@ -1207,17 +1100,9 @@ body {
         font-size: clamp(2rem, 4vw + 1rem, 3rem);
     }
 
-    .hero-images {
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5rem;
-    }
+    .hero-images { display: none; }
 
-    .image-left, .image-right {
-        width: 100%;
-        max-width: 400px;
-        transform: none;
-    }
+    .image-left, .image-right { display: none; }
 }
 
 @media (max-width: 480px) {
@@ -1233,6 +1118,46 @@ body {
         padding: 0.75rem 1.5rem;
         font-size: 0.9rem;
     }
+}
+
+
+
+/* Footer */
+.site-footer {
+  background: #0B0B10;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 4rem 1.5rem 2rem;
+  color: rgba(255,255,255,0.85);
+}
+.footer-inner { max-width: 1200px; margin: 0 auto; }
+.footer-columns { display: grid; grid-template-columns: 1.2fr 1fr 1.2fr; gap: 2.5rem; align-items: flex-start; }
+.footer-title { color:#fff; font-size:1.05rem; margin-bottom:1rem; font-weight:600; }
+.footer-links { list-style:none; padding:0; margin:0; display:grid; gap:0.5rem; }
+.footer-links a { color: rgba(255,255,255,0.75); text-decoration:none; }
+.footer-links a:hover { color:#fff; }
+.footer-subscribe .footer-text { color: rgba(255,255,255,0.75); margin-bottom: 1rem; }
+.subscribe-form { display:flex; gap:0.8rem; align-items:center; }
+.footer-input { flex:1; min-width: 220px; background:#17171F; border:none; color:#fff; padding:0.8rem 1rem; border-radius:28px; outline:none; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08); }
+.footer-btn { margin:0; }
+.footer-socials { display:flex; gap:0.6rem; margin-top:1rem; }
+.social-btn { width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; border-radius:10px; background: linear-gradient(180deg, #9D7BFF 0%, #6F4CFF 100%); box-shadow: 0 6px 18px rgba(0,0,0,0.5); color:#fff; }
+.social-btn svg { width:18px; height:18px; }
+.footer-divider { height:1px; background:rgba(255,255,255,0.08); margin:2rem 0; }
+.footer-bottom { display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+.footer-brand { display:flex; align-items:center; gap:0.6rem; }
+.footer-logo { width:28px; height:28px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; background: conic-gradient(#6F4CFF, #FF6A84, #FF4C4C, #6F4CFF); box-shadow: 0 4px 16px rgba(0,0,0,0.5); }
+.footer-brand-name { font-weight:600; color:#fff; }
+.footer-copy { color: rgba(255,255,255,0.75); }
+
+@media (max-width: 980px) {
+  .footer-columns { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .footer-columns { grid-template-columns: 1fr; }
+  .subscribe-form { flex-direction: column; align-items: stretch; }
+  .footer-input { min-width: 100%; }
+  .footer-bottom { flex-direction: column; align-items:flex-start; }
+}
 }
 
 
