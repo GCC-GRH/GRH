@@ -1,0 +1,14 @@
+#include<stdio.h>
+union A{
+    int x;
+    char y;
+};
+union B{
+    int arr[10];
+    char y;
+};
+int main(){
+    printf("Size of A: %d\n",sizeof(union A));
+    printf("Size of B: %d\n",sizeof(union B));
+    return 0;
+}
