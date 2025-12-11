@@ -318,6 +318,17 @@ function updateUIAfterLogin(userData) {
         mobileProfileMenu.style.display = 'flex';
     }
 
+    // Update mobile button to show profile picture instead of hamburger
+    const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+    const mobileProfilePic = document.getElementById('mobile-profile-pic');
+    const mobileProfileImg = document.getElementById('mobile-profile-img');
+    
+    if (mobileMenuIcon && mobileProfilePic && mobileProfileImg) {
+        mobileMenuIcon.style.display = 'none';
+        mobileProfilePic.style.display = 'flex';
+        mobileProfileImg.src = userData.avatar;
+    }
+
     hideLoginDialog();
 }
 
@@ -345,6 +356,15 @@ function updateUIAfterLogout() {
     if (mobileUserSection && mobileProfileMenu) {
         mobileUserSection.style.display = 'block';
         mobileProfileMenu.style.display = 'none';
+    }
+
+    // Update mobile button to show hamburger menu instead of profile picture
+    const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+    const mobileProfilePic = document.getElementById('mobile-profile-pic');
+    
+    if (mobileMenuIcon && mobileProfilePic) {
+        mobileMenuIcon.style.display = 'flex';
+        mobileProfilePic.style.display = 'none';
     }
 
     // Reload page to reset state

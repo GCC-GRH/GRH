@@ -26,12 +26,15 @@
         <div class="nav-right desktop-only">
             <a href="javascript:initGitHubLogin()" class="get-started-btn">Login to GitHub</a>
         </div>
-        <!-- Mobile profile/login button - replaces hamburger menu -->
+        <!-- Mobile profile/login button - shows menu icon or profile pic -->
         <button class="mobile-nav-toggle mobile-only" aria-label="Toggle menu" onclick="toggleMobileMenu()">
             <div class="mobile-menu-icon" id="mobile-menu-icon">
                 <svg class="hamburger-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 </svg>
+            </div>
+            <div class="mobile-profile-pic" id="mobile-profile-pic" style="display: none;">
+                <img id="mobile-profile-img" src="" alt="Profile" class="mobile-profile-img">
             </div>
         </button>
     </nav>
