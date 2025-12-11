@@ -265,9 +265,10 @@ function hideLoginDialog() {
  */
 function updateUIAfterLogin(userData) {
     // Hide the "Login to GitHub" button
-    const loginButtons = document.querySelectorAll('.nav-links a[href*="github.com/login"]');
+    const loginButtons = document.querySelectorAll('.nav-links a.get-started-btn, .nav-right a.get-started-btn');
     loginButtons.forEach(btn => {
-        btn.style.display = 'none';
+        btn.style.visibility = 'hidden';
+        btn.style.opacity = '0';
     });
 
     // Show user profile section in navbar with dropdown
@@ -287,10 +288,11 @@ function updateUIAfterLogin(userData) {
  * Update UI after logout
  */
 function updateUIAfterLogout() {
-    // Show the "Login to GitHub" button again
-    const loginButtons = document.querySelectorAll('.nav-links a[href*="github.com/login"]');
+    // Show the "Login to GitHub" button again with smooth transition
+    const loginButtons = document.querySelectorAll('.nav-links a.get-started-btn, .nav-right a.get-started-btn');
     loginButtons.forEach(btn => {
-        btn.style.display = 'inline-block';
+        btn.style.visibility = 'visible';
+        btn.style.opacity = '1';
     });
 
     // Hide user profile section
@@ -315,6 +317,13 @@ function checkAuthStatus() {
     
     if (userData) {
         updateUIAfterLogin(userData);
+    } else {
+        // Show login buttons if not logged in
+        const loginButtons = document.querySelectorAll('.nav-links a.get-started-btn, .nav-right a.get-started-btn');
+        loginButtons.forEach(btn => {
+            btn.style.visibility = 'visible';
+            btn.style.opacity = '1';
+        });
     }
 }
 

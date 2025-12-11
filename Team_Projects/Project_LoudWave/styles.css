@@ -671,6 +671,14 @@ body .hero-content h1 div .cursor {
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
 }
 
+/* Hide login buttons by default until auth status is checked */
+.nav-links a.get-started-btn,
+.nav-right .get-started-btn {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s ease, opacity 0.3s ease;
+}
+
 .get-started-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 22px rgba(0,0,0,0.65);
