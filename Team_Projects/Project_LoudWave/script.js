@@ -70,40 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
         cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
     }, 500);
 
-    // Mobile menu functionality
-    const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
-    const navLinks = document.querySelector('.nav-links');
-
-    mobileNavToggle.addEventListener('click', () => {
-        const isOpened = mobileNavToggle.getAttribute('aria-expanded') === 'true';
-        
-        mobileNavToggle.setAttribute('aria-expanded', !isOpened);
-        mobileNavToggle.classList.toggle('active');
-        navLinks.classList.toggle('active');
-        
-        // Prevent body scrolling when menu is open
-        document.body.style.overflow = isOpened ? 'auto' : 'hidden';
-    });
-
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!navLinks.contains(e.target) && !mobileNavToggle.contains(e.target) && navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-            mobileNavToggle.classList.remove('active');
-            mobileNavToggle.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = 'auto';
-        }
-    });
-
-    // Close mobile menu when window is resized to desktop size
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-            mobileNavToggle.classList.remove('active');
-            mobileNavToggle.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = 'auto';
-        }
-    });
+    // Mobile menu functionality is now handled by github-auth.js toggleMobileMenu() function
+    // Old menu code removed - using new mobile-nav-menu drawer instead
 
     // About us team modal interactions
     const teamCards = document.querySelectorAll('.team-card');
