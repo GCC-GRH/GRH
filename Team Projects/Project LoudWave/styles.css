@@ -1181,4 +1181,157 @@ body {
   .footer-bottom { flex-direction: column; align-items:flex-start; }
 }
 
+/* ============================================ */
+/* GITHUB OAUTH LOGIN DIALOG STYLES */
+/* ============================================ */
+
+#login-dialog {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 10, 15, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+}
+
+.login-dialog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.login-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(111, 76, 255, 0.2);
+    border-top: 4px solid #6F4CFF;
+    border-radius: 50%;
+    animation: login-spin 1s linear infinite;
+}
+
+@keyframes login-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.login-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    letter-spacing: 0.5px;
+}
+
+/* ============================================ */
+/* USER PROFILE SECTION (Navbar) */
+/* ============================================ */
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 1rem;
+    background: rgba(111, 76, 255, 0.1);
+    border: 1px solid rgba(111, 76, 255, 0.3);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.user-profile:hover {
+    background: rgba(111, 76, 255, 0.15);
+    border-color: rgba(111, 76, 255, 0.5);
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid rgba(111, 76, 255, 0.5);
+    object-fit: cover;
+    transition: transform 0.2s ease;
+}
+
+.user-avatar:hover {
+    transform: scale(1.05);
+}
+
+.user-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+
+.logout-btn {
+    background: none;
+    border: none;
+    color: #FF6A84;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    margin-left: 0.5rem;
+}
+
+.logout-btn:hover {
+    color: #FF8FA1;
+    transform: scale(1.1);
+}
+
+.logout-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Mobile responsive for user profile */
+@media (max-width: 768px) {
+    .user-profile {
+        padding: 0.4rem 0.8rem;
+    }
+
+    .user-avatar {
+        width: 28px;
+        height: 28px;
+    }
+
+    .user-name {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .user-profile {
+        gap: 0.5rem;
+    }
+
+    .user-name {
+        display: none;
+    }
+
+    .login-text {
+        font-size: 1.2rem;
+    }
+
+    .login-spinner {
+        width: 50px;
+        height: 50px;
+    }
+}
+
 

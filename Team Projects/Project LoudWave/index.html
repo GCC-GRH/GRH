@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="getting-started.css">
     <script src="script.js" defer></script>
+    <script src="github-auth.js" defer></script>
 </head>
 <body>
     <nav class="navbar">
@@ -21,11 +22,11 @@
                 <a href="#downloads">Downloads</a>
                 <a href="https://github.com/GCC-GRH" target="_blank">Github</a>
                 <!-- mobile-only login button (visible only on small screens) -->
-                <a href="https://github.com/login" class="get-started-btn mobile-only" target="_blank">Login to GitHub</a>
+                <a href="javascript:initGitHubLogin()" class="get-started-btn mobile-only">Login to GitHub</a>
             </div>
         </div>
         <div class="nav-right desktop-only">
-            <a href="https://github.com/login" class="get-started-btn" target="_blank">Login to GitHub</a>
+            <a href="javascript:initGitHubLogin()" class="get-started-btn">Login to GitHub</a>
         </div>
         <button class="mobile-nav-toggle" aria-label="Toggle menu">
             <span class="hamburger"></span>
@@ -276,6 +277,14 @@
             </div>
         </div>
     </footer>
+
+    <!-- GitHub OAuth Login Dialog -->
+    <div id="login-dialog" class="login-dialog">
+        <div class="login-dialog-content">
+            <div class="login-spinner"></div>
+            <p class="login-text">Logging you in!</p>
+        </div>
+    </div>
 
 </body>
 </html>

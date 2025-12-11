@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Login Callback</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0A0A0F 0%, #1A1A2E 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #FFF;
+        }
+
+        .callback-container {
+            text-align: center;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(111, 76, 255, 0.2);
+            border-top: 4px solid #6F4CFF;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 2rem;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .callback-text {
+            font-size: 1.2rem;
+            color: #B0B0B0;
+            margin-bottom: 1rem;
+        }
+
+        .callback-status {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(111, 76, 255, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(111, 76, 255, 0.3);
+        }
+
+        .error-message {
+            color: #FF6A84;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="callback-container">
+        <div class="loading-spinner"></div>
+        <p class="callback-text">Processing GitHub login...</p>
+        <div class="callback-status" id="status">
+            <p>Please wait while we authenticate you.</p>
+        </div>
+    </div>
+
+    <script src="github-auth.js"></script>
+    <script>
+        // Handle the GitHub OAuth callback
+        document.addEventListener('DOMContentLoaded', handleGitHubCallback);
+    </script>
+</body>
+</html>
