@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="getting-started.css">
     <script src="script.js" defer></script>
+    <script src="github-auth.js" defer></script>
 </head>
 <body>
     <nav class="navbar">
@@ -21,11 +22,11 @@
                 <a href="#downloads">Downloads</a>
                 <a href="https://github.com/GCC-GRH" target="_blank">Github</a>
                 <!-- mobile-only login button (visible only on small screens) -->
-                <a href="https://github.com/login" class="get-started-btn mobile-only" target="_blank">Login to GitHub</a>
+                <a href="javascript:initGitHubLogin()" class="get-started-btn mobile-only">Login to GitHub</a>
             </div>
         </div>
         <div class="nav-right desktop-only">
-            <a href="https://github.com/login" class="get-started-btn" target="_blank">Login to GitHub</a>
+            <a href="javascript:initGitHubLogin()" class="get-started-btn">Login to GitHub</a>
         </div>
         <button class="mobile-nav-toggle" aria-label="Toggle menu">
             <span class="hamburger"></span>
@@ -59,5 +60,54 @@
             </div>
         </section>
     </main>
+
+    <!-- GitHub OAuth Login Dialog -->
+    <div id="login-dialog" class="login-dialog">
+        <div class="login-dialog-content">
+            <div class="login-spinner"></div>
+            <p class="login-text">Logging you in!</p>
+        </div>
+    </div>
+
+    <!-- User Profile Dropdown Menu -->
+    <div id="user-dropdown-menu" class="user-dropdown-menu">
+        <a href="https://github.com/" class="dropdown-item" target="_blank">
+            <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.868-.013-1.703-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.545 2.91 1.184.092-.923.35-1.545.636-1.9-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" fill="currentColor"/>
+            </svg>
+            <span>Open GitHub Account</span>
+        </a>
+        <a href="#settings" class="dropdown-item">
+            <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="1" fill="currentColor"/>
+                <circle cx="19" cy="12" r="1" fill="currentColor"/>
+                <circle cx="5" cy="12" r="1" fill="currentColor"/>
+                <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" fill="currentColor"/>
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="currentColor"/>
+            </svg>
+            <span>Account Settings</span>
+        </a>
+        <button onclick="openLogoutConfirmation()" class="dropdown-item logout-item">
+            <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            <span>Logout</span>
+        </button>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    <div id="logout-confirmation-modal" class="logout-confirmation-modal">
+        <div class="logout-modal-content">
+            <h3>Confirm Logout</h3>
+            <p>Are you sure you want to log out?</p>
+            <div class="logout-modal-actions">
+                <button onclick="confirmLogout()" class="logout-confirm-btn">Yes, Logout</button>
+                <button onclick="cancelLogout()" class="logout-cancel-btn">No, Stay</button>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
