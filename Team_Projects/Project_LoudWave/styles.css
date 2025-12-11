@@ -1243,94 +1243,247 @@ body {
 .user-profile {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.5rem 1rem;
-    background: rgba(111, 76, 255, 0.1);
-    border: 1px solid rgba(111, 76, 255, 0.3);
-    border-radius: 50px;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
     cursor: pointer;
+    padding: 0;
+    background: rgba(111, 76, 255, 0.15);
+    border: 1px solid rgba(111, 76, 255, 0.3);
+    border-radius: 50%;
     transition: all 0.3s ease;
+    position: relative;
 }
 
 .user-profile:hover {
-    background: rgba(111, 76, 255, 0.15);
+    background: rgba(111, 76, 255, 0.25);
     border-color: rgba(111, 76, 255, 0.5);
+    transform: scale(1.05);
 }
 
 .user-avatar {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    border: 2px solid rgba(111, 76, 255, 0.5);
+    border: none;
     object-fit: cover;
     transition: transform 0.2s ease;
 }
 
 .user-avatar:hover {
-    transform: scale(1.05);
+    transform: scale(1.08);
 }
 
-.user-name {
-    font-size: 0.9rem;
-    font-weight: 500;
+/* User Dropdown Menu */
+.user-dropdown-menu {
+    position: fixed;
+    top: 90px;
+    right: 2rem;
+    min-width: 240px;
+    background: rgba(20, 20, 30, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(111, 76, 255, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 1001;
+    animation: dropdownSlideIn 0.25s ease-out;
+}
+
+.user-dropdown-menu.open {
+    display: flex;
+}
+
+@keyframes dropdownSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    border: none;
+    background: rgba(111, 76, 255, 0.1);
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(111, 76, 255, 0.2);
+}
+
+.dropdown-item:hover {
+    background: rgba(111, 76, 255, 0.2);
+    border-color: rgba(111, 76, 255, 0.4);
+    color: #FFFFFF;
+    transform: translateX(4px);
+}
+
+.dropdown-item.logout-item {
+    background: rgba(255, 106, 132, 0.1);
+    border-color: rgba(255, 106, 132, 0.2);
+    color: rgba(255, 165, 161, 0.9);
+}
+
+.dropdown-item.logout-item:hover {
+    background: rgba(255, 106, 132, 0.2);
+    border-color: rgba(255, 106, 132, 0.4);
     color: #FFFFFF;
 }
 
-.logout-btn {
-    background: none;
-    border: none;
-    color: #FF6A84;
-    cursor: pointer;
-    padding: 0;
-    display: flex;
+.dropdown-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* Logout Confirmation Modal */
+.logout-confirmation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
-    margin-left: 0.5rem;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 2000;
+    animation: fadeIn 0.25s ease-out;
 }
 
-.logout-btn:hover {
-    color: #FF8FA1;
-    transform: scale(1.1);
+.logout-confirmation-modal.show {
+    display: flex;
 }
 
-.logout-btn svg {
-    width: 16px;
-    height: 16px;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.logout-modal-content {
+    background: rgba(20, 20, 30, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(111, 76, 255, 0.3);
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 360px;
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    text-align: center;
+    animation: modalPop 0.3s ease-out;
+}
+
+@keyframes modalPop {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.logout-modal-content h3 {
+    font-size: 1.3rem;
+    color: #FFFFFF;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.logout-modal-content p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 24px;
+}
+
+.logout-modal-actions {
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+}
+
+.logout-confirm-btn {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #FF6A84, #FF8FA1);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.logout-confirm-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 106, 132, 0.4);
+}
+
+.logout-confirm-btn:active {
+    transform: translateY(0);
+}
+
+.logout-cancel-btn {
+    padding: 12px 24px;
+    background: rgba(111, 76, 255, 0.15);
+    color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(111, 76, 255, 0.3);
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.logout-cancel-btn:hover {
+    background: rgba(111, 76, 255, 0.25);
+    border-color: rgba(111, 76, 255, 0.5);
+    transform: translateY(-2px);
 }
 
 /* Mobile responsive for user profile */
 @media (max-width: 768px) {
-    .user-profile {
-        padding: 0.4rem 0.8rem;
-    }
-
-    .user-avatar {
-        width: 28px;
-        height: 28px;
-    }
-
-    .user-name {
-        font-size: 0.85rem;
+    .user-dropdown-menu {
+        top: 85px;
+        right: 1rem;
+        min-width: 220px;
     }
 }
 
 @media (max-width: 480px) {
-    .user-profile {
-        gap: 0.5rem;
+    .user-dropdown-menu {
+        top: 80px;
+        right: 0.75rem;
+        min-width: 200px;
     }
 
-    .user-name {
-        display: none;
-    }
-
-    .login-text {
-        font-size: 1.2rem;
-    }
-
-    .login-spinner {
-        width: 50px;
-        height: 50px;
+    .logout-modal-content {
+        margin: 0 1rem;
+        max-width: calc(100% - 2rem);
     }
 }
 

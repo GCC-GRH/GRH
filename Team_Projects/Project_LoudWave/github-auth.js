@@ -147,7 +147,6 @@ function getUserData() {
 function getAccessToken() {
     return localStorage.getItem('github_access_token');
 }
-
 /**
  * Logout user
  */
@@ -155,6 +154,86 @@ function logoutUser() {
     localStorage.removeItem('github_user');
     localStorage.removeItem('github_access_token');
     updateUIAfterLogout();
+}
+
+/**
+ * Open logout confirmation modal
+ */
+function openLogoutConfirmation() {
+    const modal = document.getElementById('logout-confirmation-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+    }
+}
+
+/**
+ * Confirm logout and clear data
+ */
+function confirmLogout() {
+    localStorage.removeItem('github_user');
+    localStorage.removeItem('github_access_token');
+    sessionStorage.clear();
+    
+    // Close the modal
+    const modal = document.getElementById('logout-confirmation-modal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+    
+    // Close the dropdown
+    closeUserDropdown();
+    
+    updateUIAfterLogout();
+}
+
+/**
+ * Cancel logout
+ */
+function cancelLogout() {
+    const modal = document.getElementById('logout-confirmation-modal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+/**
+ * Toggle user dropdown menu
+ */
+function toggleUserDropdown() {
+    const dropdown = document.getElementById('user-dropdown-menu');
+    if (dropdown) {
+        const isOpen = dropdown.classList.toggle('open');
+        
+        // Close other dropdowns if any
+        if (isOpen) {
+            document.addEventListener('click', closeDropdownOnClickOutside);
+        } else {
+            document.removeEventListener('click', closeDropdownOnClickOutside);
+        }
+    }
+}
+
+/**
+ * Close user dropdown menu
+ */
+function closeUserDropdown() {
+    const dropdown = document.getElementById('user-dropdown-menu');
+    if (dropdown) {
+        dropdown.classList.remove('open');
+        document.removeEventListener('click', closeDropdownOnClickOutside);
+    }
+}
+
+/**
+ * Close dropdown when clicking outside
+ */
+function closeDropdownOnClickOutside(e) {
+    const dropdown = document.getElementById('user-dropdown-menu');
+    const userProfile = document.querySelector('.user-profile');
+    
+    if (dropdown && !dropdown.contains(e.target) && !userProfile?.contains(e.target)) {
+        closeUserDropdown();
+    }
 }
 
 // ============================================
@@ -191,20 +270,12 @@ function updateUIAfterLogin(userData) {
         btn.style.display = 'none';
     });
 
-    // Show user profile section in navbar
+    // Show user profile section in navbar with dropdown
     const navRight = document.querySelector('.nav-right');
     if (navRight) {
         navRight.innerHTML = `
-            <div class="user-profile">
+            <div class="user-profile" onclick="toggleUserDropdown()">
                 <img src="${userData.avatar}" alt="${userData.username}" class="user-avatar" title="${userData.username}">
-                <span class="user-name">${userData.username}</span>
-                <button onclick="logoutUser()" class="logout-btn" title="Logout">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                        <polyline points="16 17 21 12 16 7"></polyline>
-                        <line x1="21" y1="12" x2="9" y2="12"></line>
-                    </svg>
-                </button>
             </div>
         `;
     }
