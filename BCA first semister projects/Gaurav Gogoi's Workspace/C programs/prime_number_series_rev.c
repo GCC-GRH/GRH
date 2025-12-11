@@ -1,19 +1,11 @@
 #include<stdio.h>
 void main(){
-    int n,cnt=0;
-    printf("\n Please enter the value of N to print n number of prime numbers: \n==>");
+    int n,j,cnt=0;
+    printf("\n Please enter the value of N \n==>");
     scanf("%d",&n);
-    for(int i=1;i<=n;i++){
-        cnt=0;
-        for(int j=1;j<=i;j++){
-            if(i%j==0){
-                cnt++;
-            }
-
-        }
-    if(cnt==2){
-        printf("%d\n",i);
-    }
+    for(j=1;j<=n;j++,(n%j==0) ? cnt++ : cnt--);
+    (cnt--,cnt==2) ? printf("\nIt is prime",j) : printf("\n it is not");
     
-    }
+    
+    
 }

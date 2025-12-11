@@ -426,10 +426,22 @@ body .hero-content h1 div .cursor {
     position: relative;
 }
 
+.feature-card::before,
+.feature-card::after {
+    content: none !important;
+    display: none !important;
+}
+
 .card-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.card-content::before,
+.card-content::after {
+    content: none !important;
+    display: none !important;
 }
 
 .card-content h3 {
@@ -439,6 +451,12 @@ body .hero-content h1 div .cursor {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.card-content h3::before,
+.card-content h3::after {
+    content: none !important;
+    display: none !important;
 }
 
 .card-content p {
@@ -1021,14 +1039,16 @@ body {
 
 /* Hero Section */
 .hero {
-    padding: calc(var(--navbar-height) + 4rem) 2.5rem 4rem;
+    padding: calc(var(--navbar-height) + 4rem) 2.5rem 8rem;
     display: flex;
     flex-direction: column;
     gap: 4rem;
     width: 100%;
     position: relative;
     overflow: hidden;
-    background: transparent;
+    background: linear-gradient(180deg, rgba(10, 10, 15, 0.7) 0%, rgba(10, 10, 15, 0.85) 30%, rgba(10, 10, 15, 0.95) 60%, rgba(10, 10, 15, 1) 85%), url('https://thumbs.dreamstime.com/b/retro-bit-video-game-interface-background-made-pixels-332907564.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
 /* Removed hero glow overlays to keep uniform background */
@@ -1136,12 +1156,14 @@ body {
 .footer-links a { color: rgba(255,255,255,0.75); text-decoration:none; }
 .footer-links a:hover { color:#fff; }
 .footer-subscribe .footer-text { color: rgba(255,255,255,0.75); margin-bottom: 1rem; }
+.footer-subscribe { padding-left: 2rem; padding-right: 2rem; }
 .subscribe-form { display:flex; gap:0.8rem; align-items:center; }
 .footer-input { flex:1; min-width: 220px; background:#17171F; border:none; color:#fff; padding:0.8rem 1rem; border-radius:28px; outline:none; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08); }
 .footer-btn { margin:0; }
 .footer-socials { display:flex; gap:0.6rem; margin-top:1rem; }
-.social-btn { width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; border-radius:10px; background: linear-gradient(180deg, #9D7BFF 0%, #6F4CFF 100%); box-shadow: 0 6px 18px rgba(0,0,0,0.5); color:#fff; }
+.social-btn { width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; border-radius:10px; background: transparent; border: none; cursor: pointer; padding: 0; }
 .social-btn svg { width:18px; height:18px; }
+.social-btn img { width:18px; height:18px; object-fit: contain; }
 .footer-divider { height:1px; background:rgba(255,255,255,0.08); margin:2rem 0; }
 .footer-bottom { display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
 .footer-brand { display:flex; align-items:center; gap:0.6rem; }
@@ -1157,7 +1179,6 @@ body {
   .subscribe-form { flex-direction: column; align-items: stretch; }
   .footer-input { min-width: 100%; }
   .footer-bottom { flex-direction: column; align-items:flex-start; }
-}
 }
 
 

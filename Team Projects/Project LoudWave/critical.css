@@ -1,12 +1,14 @@
 .hero {
-    padding: 8rem 2rem 4rem;
+    padding: 8rem 2rem 6rem;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: #0A0A0F;
+    background: linear-gradient(rgba(10, 10, 15, 0.75), rgba(10, 10, 15, 0.75)), url('https://thumbs.dreamstime.com/b/retro-bit-video-game-interface-background-made-pixels-332907564.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
 .hero-content {
