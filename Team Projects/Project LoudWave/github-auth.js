@@ -3,7 +3,7 @@
 // ============================================
 // TODO: Replace these placeholders with your GitHub OAuth app credentials
 const GITHUB_CLIENT_ID = 'Ov23liYLlWgff0wIqfML'; // Get from: https://github.com/settings/developers
-const GITHUB_REDIRECT_URI = 'https://loudwave.vercel.app/'; // e.g., http://localhost:3000/callback.html or your live domain
+const GITHUB_REDIRECT_URI = 'https://loudwave.vercel.app/callback.html'; // ✅ Must match GitHub OAuth App settings exactly
 const GITHUB_SCOPES = 'user:email repo workflow'; // Scopes needed for your app
 
 // ============================================
@@ -26,21 +26,18 @@ function initGitHubLogin() {
 
 /**
  * Exchange authorization code for access token
- * This should be called from your backend
- * TODO: You need a backend endpoint that:
- * 1. Takes the authorization code
- * 2. Exchanges it for an access token using your GitHub Client Secret
- * 3. Returns the access token to the frontend
+ * ✅ Calls Vercel serverless function to securely exchange code
+ * The CLIENT_SECRET is stored in Vercel env vars (never exposed to frontend)
  * 
- * Backend endpoint format:
+ * Vercel serverless function: /api/github/callback.js
  * POST /api/github/callback
  * Body: { code: string }
  * Response: { access_token: string }
  */
 async function exchangeCodeForToken(code) {
     try {
-        // TODO: Replace 'YOUR_BACKEND_URL' with your actual backend URL
-        const response = await fetch('YOUR_BACKEND_URL/api/github/callback', {
+        // ✅ Using relative path - Vercel serverless function handles token exchange securely
+        const response = await fetch('/api/github/callback', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -312,9 +309,9 @@ async function cloneRepository(repoUrl) {
     }
 
     try {
-        // TODO: Implement backend endpoint for cloning
+        // TODO: Implement Vercel serverless function for cloning
         // Backend should handle: git clone, authentication, file system access
-        const response = await fetch('YOUR_BACKEND_URL/api/repo/clone', {
+        const response = await fetch('/api/repo/clone', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
