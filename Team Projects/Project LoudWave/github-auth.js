@@ -2,8 +2,8 @@
 // GITHUB OAUTH CONFIGURATION
 // ============================================
 // TODO: Replace these placeholders with your GitHub OAuth app credentials
-const GITHUB_CLIENT_ID = 'YOUR_GITHUB_CLIENT_ID_HERE'; // Get from: https://github.com/settings/developers
-const GITHUB_REDIRECT_URI = 'YOUR_REDIRECT_URI_HERE'; // e.g., http://localhost:3000/callback.html or your live domain
+const GITHUB_CLIENT_ID = 'Ov23liYLlWgff0wIqfML'; // Get from: https://github.com/settings/developers
+const GITHUB_REDIRECT_URI = 'https://loudwave.vercel.app/'; // e.g., http://localhost:3000/callback.html or your live domain
 const GITHUB_SCOPES = 'user:email repo workflow'; // Scopes needed for your app
 
 // ============================================
