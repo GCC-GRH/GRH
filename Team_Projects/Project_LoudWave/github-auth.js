@@ -197,7 +197,7 @@ function cancelLogout() {
 }
 
 /**
- * Toggle user dropdown menu
+ * Toggle user dropdown menu (desktop)
  */
 function toggleUserDropdown() {
     const dropdown = document.getElementById('user-dropdown-menu');
@@ -210,6 +210,34 @@ function toggleUserDropdown() {
         } else {
             document.removeEventListener('click', closeDropdownOnClickOutside);
         }
+    }
+}
+
+/**
+ * Toggle mobile navigation menu
+ */
+function toggleMobileMenu() {
+    const mobileMenu = document.getElementById('mobile-nav-menu');
+    const menuIcon = document.getElementById('mobile-menu-icon');
+    
+    if (mobileMenu) {
+        mobileMenu.classList.toggle('active');
+        menuIcon.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+    }
+}
+
+/**
+ * Close mobile menu
+ */
+function closeMobileMenu() {
+    const mobileMenu = document.getElementById('mobile-nav-menu');
+    const menuIcon = document.getElementById('mobile-menu-icon');
+    
+    if (mobileMenu && mobileMenu.classList.contains('active')) {
+        mobileMenu.classList.remove('active');
+        menuIcon.classList.remove('active');
+        document.body.style.overflow = 'auto';
     }
 }
 
@@ -271,7 +299,7 @@ function updateUIAfterLogin(userData) {
         btn.style.opacity = '0';
     });
 
-    // Show user profile section in navbar with dropdown
+    // Show user profile section in navbar with dropdown (desktop)
     const navRight = document.querySelector('.nav-right');
     if (navRight) {
         navRight.innerHTML = `
@@ -279,6 +307,15 @@ function updateUIAfterLogin(userData) {
                 <img src="${userData.avatar}" alt="${userData.username}" class="user-avatar" title="${userData.username}">
             </div>
         `;
+    }
+
+    // Update mobile menu (hide login button, show profile menu)
+    const mobileUserSection = document.getElementById('mobile-user-section');
+    const mobileProfileMenu = document.getElementById('mobile-profile-menu');
+    
+    if (mobileUserSection && mobileProfileMenu) {
+        mobileUserSection.style.display = 'none';
+        mobileProfileMenu.style.display = 'flex';
     }
 
     hideLoginDialog();
@@ -295,10 +332,19 @@ function updateUIAfterLogout() {
         btn.style.opacity = '1';
     });
 
-    // Hide user profile section
+    // Hide user profile section (desktop)
     const navRight = document.querySelector('.nav-right');
     if (navRight) {
         navRight.innerHTML = '';
+    }
+
+    // Update mobile menu (show login button, hide profile menu)
+    const mobileUserSection = document.getElementById('mobile-user-section');
+    const mobileProfileMenu = document.getElementById('mobile-profile-menu');
+    
+    if (mobileUserSection && mobileProfileMenu) {
+        mobileUserSection.style.display = 'block';
+        mobileProfileMenu.style.display = 'none';
     }
 
     // Reload page to reset state
@@ -325,6 +371,20 @@ function checkAuthStatus() {
             btn.style.opacity = '1';
         });
     }
+
+    // Add event listeners for mobile menu
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+
+    const mobileProfileLinks = document.querySelectorAll('.mobile-profile-link');
+    mobileProfileLinks.forEach(link => {
+        // Don't close for logout button since it opens a confirmation dialog
+        if (!link.classList.contains('mobile-logout-btn')) {
+            link.addEventListener('click', closeMobileMenu);
+        }
+    });
 }
 
 /**

@@ -50,8 +50,9 @@ body {
     display: flex;
     align-items: center;
     gap: 2rem;
-    flex: 1;
-    justify-content: flex-start;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .nav-right {
@@ -163,37 +164,171 @@ body {
     display: none !important;
 }
 
+/* Mobile Navigation Menu Styles */
+.mobile-nav-toggle {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    z-index: 1001;
+}
+
+.mobile-menu-icon {
+    width: 28px;
+    height: 28px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-icon.active {
+    color: #fff;
+}
+
+.hamburger-icon {
+    width: 100%;
+    height: 100%;
+}
+
+.mobile-nav-menu {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(20, 20, 30, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(111, 76, 255, 0.2);
+    z-index: 999;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+}
+
+.mobile-nav-menu.active {
+    transform: translateX(0);
+}
+
+.mobile-nav-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 1.5rem 1rem;
+}
+
+.mobile-nav-link {
+    padding: 1rem 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+    background: rgba(111, 76, 255, 0.15);
+    color: #fff;
+    padding-left: 2rem;
+}
+
+.mobile-nav-divider {
+    height: 1px;
+    background: rgba(111, 76, 255, 0.2);
+    margin: 1rem 0;
+}
+
+.mobile-user-section {
+    display: block;
+}
+
+.mobile-login-btn {
+    background: linear-gradient(90deg, #6F4CFF 0%, #9D7BFF 100%);
+    color: #fff !important;
+    border-radius: 12px;
+    margin-top: 0.5rem;
+}
+
+.mobile-login-btn:hover {
+    background: linear-gradient(90deg, #7d5aff 0%, #ab8aff 100%);
+    padding-left: 1.5rem;
+}
+
+.mobile-profile-menu {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mobile-profile-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 1rem 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(111, 76, 255, 0.1);
+    border: none;
+    border-radius: 12px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    font-family: inherit;
+    font-weight: 500;
+}
+
+.mobile-profile-link:hover {
+    background: rgba(111, 76, 255, 0.2);
+    color: #fff;
+    padding-left: 2rem;
+}
+
+.mobile-logout-btn {
+    background: rgba(255, 106, 132, 0.1) !important;
+    color: rgba(255, 165, 161, 0.9) !important;
+}
+
+.mobile-logout-btn:hover {
+    background: rgba(255, 106, 132, 0.2) !important;
+    color: #fff !important;
+}
+
+.mobile-link-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
     @media (max-width: 768px) {
     .mobile-nav-toggle {
-        display: block;
+        display: flex !important;
         z-index: 1001;
     }
 
     .nav-links {
-        position: fixed;
-        top: 80px;
-        right: -100%;
-        height: calc(100vh - 80px);
-        width: 100%;
-        background: rgba(10, 10, 15, 0.95);
-        backdrop-filter: blur(10px);
-        flex-direction: column;
-        justify-content: flex-start;
-        padding: 2rem;
-        transition: right 0.3s ease;
-        gap: 2rem;
+        display: none;
     }
 
-    .nav-links.active {
-        right: 0;
+    .nav-right {
+        display: none !important;
     }
 
     .desktop-only {
-        display: none;
+        display: none !important;
     }
 
     .mobile-only {
         display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 
     .nav-brand {
