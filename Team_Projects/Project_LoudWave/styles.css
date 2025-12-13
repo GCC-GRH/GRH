@@ -212,6 +212,7 @@ body {
     justify-content: center;
     width: 40px;
     height: 40px;
+    margin: 0;
 }
 
 .mobile-profile-img {
@@ -254,6 +255,7 @@ body {
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
     display: block;
+    text-align: center;
     transition: all 0.3s ease;
     border-radius: 12px;
     font-weight: 500;
@@ -263,7 +265,7 @@ body {
 .mobile-nav-link.active {
     background: rgba(111, 76, 255, 0.15);
     color: #fff;
-    padding-left: 2rem;
+    padding-left: 1.5rem;
 }
 
 .mobile-nav-divider {
@@ -1161,11 +1163,15 @@ body {
 
 @media (max-width: 768px) {
     .mobile-nav-toggle {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .nav-left {
         flex: 0;
+        display: flex;
+        align-items: center;
     }
 
     .nav-links {
@@ -1221,6 +1227,17 @@ body {
 @media (max-width: 480px) {
     .navbar {
         padding: 0.75rem 1rem;
+    }
+
+    .nav-left {
+        display: flex;
+        align-items: center;
+    }
+
+    .mobile-nav-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .nav-icon {
