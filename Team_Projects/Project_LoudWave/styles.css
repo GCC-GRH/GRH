@@ -71,17 +71,26 @@ body {
 }
 
 .brand-name {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
     font-weight: 600;
     font-size: 1.5rem;
-    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.3));
-    background-size: 200% 200%;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: -0.02em;
+    text-shadow: 
+        0 1px 2px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(255, 255, 255, 0.85) 50%,
+        rgba(255, 255, 255, 0.9) 100%
+    );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    letter-spacing: 0.5px;
-    animation: shimmer 3s ease-in-out infinite alternate;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+    position: relative;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
 }
 
 @keyframes shimmer {
@@ -267,14 +276,32 @@ body {
 }
 
 .mobile-login-btn {
-    background: linear-gradient(90deg, #6F4CFF 0%, #9D7BFF 100%);
-    color: #fff !important;
-    border-radius: 12px;
+    padding: clamp(0.5rem, 0.5vw + 0.25rem, 0.625rem) clamp(1.5rem, 1vw + 1.25rem, 2.5rem);
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 100px;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-size: clamp(0.875rem, 1vw + 0.5rem, 0.95rem);
+    font-weight: 500;
+    transition: all 0.2s ease;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    position: relative;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-image: linear-gradient(#13111C, #13111C), 
+                     linear-gradient(90deg, #3B82F6 0%, #E94F86 100%);
     margin-top: 0.5rem;
+    display: block;
+    text-align: center;
 }
 
 .mobile-login-btn:hover {
-    background: linear-gradient(90deg, #7d5aff 0%, #ab8aff 100%);
+    color: #ffffff !important;
+    background-image: linear-gradient(90deg, #3B82F6 0%, #E94F86 100%),
+                     linear-gradient(90deg, #3B82F6 0%, #E94F86 100%);
+    transform: translateY(-1px);
     padding-left: 1.5rem;
 }
 
@@ -764,7 +791,7 @@ body .hero-content h1 div .cursor {
     background: rgba(28, 28, 35, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 24px;
-    padding: 2rem;
+    padding: 2rem 4.5rem;
     position: relative;
     overflow: hidden;
 }
@@ -858,6 +885,7 @@ body .hero-content h1 div .cursor {
     .step-card {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+        padding: 2rem 3.5rem;
     }
     
     .step-number {
@@ -1020,8 +1048,24 @@ body {
 .brand-name {
     font-size: clamp(1.25rem, 1.5vw + 1rem, 1.5rem);
     font-weight: 600;
-    color: #ffffff;
-    letter-spacing: -0.01em;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: -0.02em;
+    text-shadow: 
+        0 1px 2px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(255, 255, 255, 0.85) 50%,
+        rgba(255, 255, 255, 0.9) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
 }
 
 .nav-links {
@@ -1070,6 +1114,12 @@ body {
 /* Slightly larger border on desktop for a clearer outline; scale down on small screens */
 @media (max-width: 768px) {
     .get-started-btn {
+        padding: clamp(0.5rem, 0.5vw + 0.25rem, 0.625rem) clamp(1rem, 1vw + 0.5rem, 1.5rem);
+        border-radius: 100px;
+        font-size: 0.95rem;
+    }
+    
+    .mobile-login-btn {
         padding: clamp(0.5rem, 0.5vw + 0.25rem, 0.625rem) clamp(1rem, 1vw + 0.5rem, 1.5rem);
         border-radius: 100px;
         font-size: 0.95rem;
@@ -1323,18 +1373,153 @@ body {
   color: rgba(255,255,255,0.85);
 }
 .footer-inner { max-width: 1200px; margin: 0 auto; }
-.footer-columns { display: grid; grid-template-columns: 1.2fr 1fr 1.2fr; gap: 2.5rem; align-items: flex-start; }
+.footer-columns { display: grid; grid-template-columns: 1.2fr 1fr 1.6fr; gap: 2.5rem; align-items: flex-start; }
 .footer-title { color:#fff; font-size:1.05rem; margin-bottom:1rem; font-weight:600; }
 .footer-links { list-style:none; padding:0; margin:0; display:grid; gap:0.5rem; }
 .footer-links a { color: rgba(255,255,255,0.75); text-decoration:none; }
 .footer-links a:hover { color:#fff; }
-.footer-subscribe .footer-text { color: rgba(255,255,255,0.75); margin-bottom: 1rem; }
-.footer-subscribe { padding-left: 2rem; padding-right: 2rem; }
-.subscribe-form { display:flex; gap:0.8rem; align-items:center; }
-.footer-input { flex:1; min-width: 220px; background:#17171F; border:none; color:#fff; padding:0.8rem 1rem; border-radius:28px; outline:none; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08); }
-.footer-btn { margin:0; }
-.footer-socials { display:flex; gap:0.6rem; margin-top:1rem; }
-.social-btn { width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; border-radius:10px; background: transparent; border: none; cursor: pointer; padding: 0; }
+.footer-subscribe {
+    padding: 2.5rem 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-subscribe::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.2) 50%, 
+        transparent 100%);
+    pointer-events: none;
+}
+
+.footer-subscribe::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(111, 76, 255, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+    animation: shimmer 8s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% {
+        transform: translate(-50%, -50%) rotate(0deg);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translate(-30%, -30%) rotate(180deg);
+        opacity: 0.5;
+    }
+}
+
+.footer-subscribe .footer-title {
+    position: relative;
+    z-index: 1;
+}
+
+.footer-subscribe .footer-text { 
+    color: rgba(255,255,255,0.75); 
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+.subscribe-form { 
+    display:flex; 
+    gap:0.8rem; 
+    align-items:center;
+    position: relative;
+    z-index: 1;
+}
+
+.footer-input { 
+    flex:1; 
+    min-width: 220px; 
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff; 
+    padding: 0.875rem 1.25rem; 
+    border-radius: 16px; 
+    outline: none; 
+    box-shadow: 
+        inset 0 2px 4px rgba(0, 0, 0, 0.1),
+        0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.footer-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.footer-input:focus {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(111, 76, 255, 0.4);
+    box-shadow: 
+        inset 0 2px 4px rgba(0, 0, 0, 0.1),
+        0 0 0 3px rgba(111, 76, 255, 0.1),
+        0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.footer-btn { 
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.footer-socials { 
+    display: flex; 
+    gap: 0.6rem; 
+    margin-top: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+.social-btn { 
+    width: 40px; 
+    height: 40px; 
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 12px; 
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer; 
+    padding: 0;
+    transition: all 0.3s ease;
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.social-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 4px 12px rgba(0, 0, 0, 0.3);
+}
 .social-btn svg { width:18px; height:18px; }
 .social-btn img { width:18px; height:18px; object-fit: contain; }
 .footer-divider { height:1px; background:rgba(255,255,255,0.08); margin:2rem 0; }
@@ -1346,9 +1531,16 @@ body {
 
 @media (max-width: 980px) {
   .footer-columns { grid-template-columns: 1fr 1fr; }
+  .footer-subscribe {
+    padding: 2rem 1.5rem;
+  }
 }
 @media (max-width: 640px) {
   .footer-columns { grid-template-columns: 1fr; }
+  .footer-subscribe {
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+  }
   .subscribe-form { flex-direction: column; align-items: stretch; }
   .footer-input { min-width: 100%; }
   .footer-bottom { flex-direction: column; align-items:flex-start; }

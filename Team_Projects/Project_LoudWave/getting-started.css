@@ -149,12 +149,14 @@
 @media (max-width: 768px) {
     .steps-container {
         gap: 1.5rem;
+        padding: 0 2rem;
     }
 }
 
 @media (max-width: 640px) {
     .steps-container {
         gap: 1.25rem;
+        padding: 0 1.5rem;
     }
 }
 
@@ -190,14 +192,14 @@
     .step-card {
         grid-template-columns: 1fr;
         gap: 1.5rem;
-        padding: 1.5rem;
+        padding: 1.5rem 2.5rem;
         min-height: auto;
     }
 }
 
 @media (max-width: 640px) {
     .step-card {
-        padding: 1.25rem;
+        padding: 1.25rem 2rem;
         gap: 1.25rem;
     }
 }
