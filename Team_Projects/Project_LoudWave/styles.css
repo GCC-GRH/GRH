@@ -1052,6 +1052,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
     color: rgba(255, 255, 255, 0.95);
     letter-spacing: -0.02em;
+    line-height: 1;
     text-shadow: 
         0 1px 2px rgba(0, 0, 0, 0.3),
         0 0 20px rgba(255, 255, 255, 0.1),
@@ -1067,6 +1068,8 @@ body {
     -webkit-text-fill-color: transparent;
     position: relative;
     filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+    display: flex;
+    align-items: center;
 }
 
 .nav-links {
@@ -1603,6 +1606,7 @@ body {
 .nav-right {
     position: absolute;
     right: 2rem;
+    top: 0;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -1617,11 +1621,13 @@ body {
     height: 44px;
     cursor: pointer;
     padding: 0;
+    margin: 0;
     background: rgba(111, 76, 255, 0.15);
     border: 1px solid rgba(111, 76, 255, 0.3);
     border-radius: 50%;
     transition: all 0.3s ease;
     position: relative;
+    flex-shrink: 0;
 }
 
 .user-profile:hover {
