@@ -214,15 +214,30 @@ body {
     justify-content: center;
     width: 40px;
     height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    aspect-ratio: 1 / 1;
     margin: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
 }
 
 .mobile-profile-img {
     width: 100%;
     height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
     border-radius: 50%;
     object-fit: cover;
+    object-position: center center;
+    aspect-ratio: 1 / 1;
     border: 2px solid rgba(111, 76, 255, 0.3);
+    box-sizing: border-box;
+    display: block;
 }
 
 .mobile-nav-menu {
@@ -1257,19 +1272,28 @@ body {
         font-size: clamp(0.9rem, 1.5vw + 0.5rem, 1rem);
     }
 
-    /* Mobile profile icon - 70% height to fix oval issue */
+    /* Mobile profile icon - same size as desktop, perfectly circular */
     .mobile-profile-pic {
-        width: 70% !important;
-        height: 70% !important;
-        max-width: 70% !important;
-        max-height: 70% !important;
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
+        max-width: 40px !important;
+        max-height: 40px !important;
         aspect-ratio: 1 / 1 !important;
+        flex-shrink: 0 !important;
     }
 
     .mobile-profile-img {
         width: 100% !important;
         height: 100% !important;
+        min-width: 100% !important;
+        min-height: 100% !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
         aspect-ratio: 1 / 1 !important;
+        object-fit: cover !important;
+        object-position: center center !important;
     }
 }
 
