@@ -1163,6 +1163,21 @@ body {
         gap: 2rem;
         padding: 0 1rem;
     }
+
+    /* Ensure desktop profile icon stays at fixed size on tablets */
+    .user-profile {
+        width: 40px !important;
+        height: 40px !important;
+        max-width: 40px !important;
+        max-height: 40px !important;
+    }
+
+    .user-avatar {
+        width: 38px !important;
+        height: 38px !important;
+        max-width: 38px !important;
+        max-height: 38px !important;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1240,6 +1255,21 @@ body {
         margin-top: 0.5rem;
         padding: clamp(0.625rem, 1.5vh, 0.75rem) clamp(1.25rem, 3vw, 1.75rem);
         font-size: clamp(0.9rem, 1.5vw + 0.5rem, 1rem);
+    }
+
+    /* Mobile profile icon - 70% height to fix oval issue */
+    .mobile-profile-pic {
+        width: 70% !important;
+        height: 70% !important;
+        max-width: 70% !important;
+        max-height: 70% !important;
+        aspect-ratio: 1 / 1 !important;
+    }
+
+    .mobile-profile-img {
+        width: 100% !important;
+        height: 100% !important;
+        aspect-ratio: 1 / 1 !important;
     }
 }
 
@@ -1670,12 +1700,12 @@ body {
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
-    width: 70% !important;
-    height: 70% !important;
-    min-width: 0 !important;
-    min-height: 0 !important;
-    max-width: 70% !important;
-    max-height: 70% !important;
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
     aspect-ratio: 1 / 1 !important;
     cursor: pointer;
     padding: 0 !important;
@@ -1702,12 +1732,12 @@ body {
 
 .user-profile img.user-avatar,
 .user-avatar {
-    width: calc(100% - 2px) !important;
-    height: calc(100% - 2px) !important;
-    min-width: 0 !important;
-    min-height: 0 !important;
-    max-width: calc(100% - 2px) !important;
-    max-height: calc(100% - 2px) !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    max-width: 38px !important;
+    max-height: 38px !important;
     border-radius: 50% !important;
     border: none !important;
     object-fit: cover !important;
