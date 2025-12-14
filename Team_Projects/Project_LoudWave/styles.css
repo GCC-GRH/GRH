@@ -1663,10 +1663,11 @@ body {
     gap: 1rem;
     height: 100%;
     box-sizing: border-box;
+    align-content: center;
 }
 
 .user-profile {
-    display: inline-flex;
+    display: inline-flex !important;
     align-items: center;
     justify-content: center;
     width: 40px !important;
@@ -1678,7 +1679,7 @@ body {
     aspect-ratio: 1 / 1 !important;
     cursor: pointer;
     padding: 0 !important;
-    margin: 0 !important;
+    margin: 0 auto !important;
     background: rgba(111, 76, 255, 0.15);
     border: 1px solid rgba(111, 76, 255, 0.3);
     border-radius: 50% !important;
@@ -1686,6 +1687,8 @@ body {
     transition: all 0.3s ease;
     position: relative;
     flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    align-self: center !important;
     box-sizing: border-box !important;
     line-height: 0 !important;
     vertical-align: middle;
@@ -1699,12 +1702,12 @@ body {
 
 .user-profile img.user-avatar,
 .user-avatar {
-    width: 100% !important;
-    height: 100% !important;
-    min-width: 100% !important;
-    min-height: 100% !important;
-    max-width: 100% !important;
-    max-height: 100% !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    max-width: 38px !important;
+    max-height: 38px !important;
     border-radius: 50% !important;
     border: none !important;
     object-fit: cover !important;
@@ -1714,6 +1717,7 @@ body {
     transition: transform 0.2s ease;
     box-sizing: border-box !important;
     flex-shrink: 0 !important;
+    flex-grow: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
     line-height: 0 !important;
