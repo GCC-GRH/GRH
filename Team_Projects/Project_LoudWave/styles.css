@@ -1670,12 +1670,12 @@ body {
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
-    width: 40px !important;
-    height: 40px !important;
-    min-width: 40px !important;
-    min-height: 40px !important;
-    max-width: 40px !important;
-    max-height: 40px !important;
+    width: 70% !important;
+    height: 70% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: 70% !important;
+    max-height: 70% !important;
     aspect-ratio: 1 / 1 !important;
     cursor: pointer;
     padding: 0 !important;
@@ -1702,12 +1702,12 @@ body {
 
 .user-profile img.user-avatar,
 .user-avatar {
-    width: 38px !important;
-    height: 38px !important;
-    min-width: 38px !important;
-    min-height: 38px !important;
-    max-width: 38px !important;
-    max-height: 38px !important;
+    width: calc(100% - 2px) !important;
+    height: calc(100% - 2px) !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: calc(100% - 2px) !important;
+    max-height: calc(100% - 2px) !important;
     border-radius: 50% !important;
     border: none !important;
     object-fit: cover !important;
