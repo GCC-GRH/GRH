@@ -1533,8 +1533,9 @@ body {
 }
 
 .footer-subscribe {
-    --mouse-x: 0px;
-    --mouse-y: 0px;
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+    position: relative;
 }
 
 .footer-subscribe::after {
@@ -1543,19 +1544,20 @@ body {
     width: 150px;
     height: 150px;
     background: radial-gradient(circle, 
-        rgba(255, 255, 255, 0.4) 0%, 
-        rgba(255, 255, 255, 0.2) 40%,
-        rgba(255, 255, 255, 0.1) 60%,
+        rgba(255, 255, 255, 0.5) 0%, 
+        rgba(255, 255, 255, 0.3) 30%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.05) 70%,
         transparent 100%);
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.15s ease;
+    transition: opacity 0.2s ease;
     transform: translate(-50%, -50%);
-    left: var(--mouse-x);
-    top: var(--mouse-y);
-    z-index: 0;
+    left: var(--mouse-x, 50%);
+    top: var(--mouse-y, 50%);
+    z-index: 1;
     border-radius: 50%;
-    filter: blur(15px);
+    filter: blur(20px);
 }
 
 .footer-subscribe:hover::after {

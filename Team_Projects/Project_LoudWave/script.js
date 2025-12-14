@@ -102,14 +102,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function closeModal() {
-        memberModal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = 'auto';
+        if (memberModal) {
+            memberModal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = 'auto';
+        }
     }
 
-    closeMember.addEventListener('click', closeModal);
-    memberModal.addEventListener('click', (e) => {
-        if (e.target === memberModal) closeModal();
-    });
+    if (closeMember) {
+        closeMember.addEventListener('click', closeModal);
+    }
+    if (memberModal) {
+        memberModal.addEventListener('click', (e) => {
+            if (e.target === memberModal) closeModal();
+        });
+    }
 
     // Footer subscribe card light effect (torch effect)
     function initFooterLightEffect() {
@@ -128,4 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize the effect
     initFooterLightEffect();
+    // Also try after a short delay in case footer loads later
+    setTimeout(initFooterLightEffect, 500);
 });
