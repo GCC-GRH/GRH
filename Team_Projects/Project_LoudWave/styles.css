@@ -1535,24 +1535,26 @@ body {
 .footer-subscribe::after {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(111, 76, 255, 0.1) 0%, transparent 70%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, 
+        rgba(111, 76, 255, 0.5) 0%, 
+        rgba(111, 76, 255, 0.3) 30%,
+        rgba(111, 76, 255, 0.15) 50%,
+        rgba(111, 76, 255, 0.05) 70%,
+        transparent 100%);
     pointer-events: none;
-    animation: shimmer 8s ease-in-out infinite;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    transform: translate(-50%, -50%);
+    left: var(--mouse-x, 50%);
+    top: var(--mouse-y, 50%);
+    z-index: 0;
+    will-change: left, top, opacity;
 }
 
-@keyframes shimmer {
-    0%, 100% {
-        transform: translate(-50%, -50%) rotate(0deg);
-        opacity: 0.3;
-    }
-    50% {
-        transform: translate(-30%, -30%) rotate(180deg);
-        opacity: 0.5;
-    }
+.footer-subscribe:hover::after {
+    opacity: 1;
 }
 
 .footer-subscribe .footer-title {

@@ -110,4 +110,21 @@ document.addEventListener('DOMContentLoaded', () => {
     memberModal.addEventListener('click', (e) => {
         if (e.target === memberModal) closeModal();
     });
+
+    // Footer subscribe card light effect (torch effect)
+    const footerSubscribe = document.querySelector('.footer-subscribe');
+    if (footerSubscribe) {
+        footerSubscribe.addEventListener('mousemove', (e) => {
+            const rect = footerSubscribe.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            
+            footerSubscribe.style.setProperty('--mouse-x', `${x}%`);
+            footerSubscribe.style.setProperty('--mouse-y', `${y}%`);
+        });
+
+        footerSubscribe.addEventListener('mouseleave', () => {
+            // Light will fade out via CSS transition
+        });
+    }
 });
