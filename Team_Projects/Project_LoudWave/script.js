@@ -112,8 +112,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Footer subscribe card light effect (torch effect)
-    const footerSubscribe = document.querySelector('.footer-subscribe');
-    if (footerSubscribe) {
+    function initFooterLightEffect() {
+        const footerSubscribe = document.querySelector('.footer-subscribe');
+        if (!footerSubscribe) return;
+        
         footerSubscribe.addEventListener('mousemove', (e) => {
             const rect = footerSubscribe.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -123,4 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
             footerSubscribe.style.setProperty('--mouse-y', `${y}px`);
         });
     }
+    
+    // Initialize the effect
+    initFooterLightEffect();
 });
