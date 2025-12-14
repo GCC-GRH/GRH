@@ -116,15 +116,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (footerSubscribe) {
         footerSubscribe.addEventListener('mousemove', (e) => {
             const rect = footerSubscribe.getBoundingClientRect();
-            const x = ((e.clientX - rect.left) / rect.width) * 100;
-            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
             
-            footerSubscribe.style.setProperty('--mouse-x', `${x}%`);
-            footerSubscribe.style.setProperty('--mouse-y', `${y}%`);
-        });
-
-        footerSubscribe.addEventListener('mouseleave', () => {
-            // Light will fade out via CSS transition
+            footerSubscribe.style.setProperty('--mouse-x', `${x}px`);
+            footerSubscribe.style.setProperty('--mouse-y', `${y}px`);
         });
     }
 });
