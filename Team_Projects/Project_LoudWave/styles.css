@@ -1540,25 +1540,23 @@ body {
 .footer-subscribe::after {
     content: '';
     position: absolute;
-    width: 600px;
-    height: 600px;
+    width: 150px;
+    height: 150px;
     background: radial-gradient(circle, 
-        rgba(111, 76, 255, 0.7) 0%, 
-        rgba(111, 76, 255, 0.5) 20%,
-        rgba(111, 76, 255, 0.3) 40%,
-        rgba(111, 76, 255, 0.15) 60%,
-        rgba(111, 76, 255, 0.05) 80%,
+        rgba(255, 255, 255, 0.4) 0%, 
+        rgba(255, 255, 255, 0.2) 40%,
+        rgba(255, 255, 255, 0.1) 60%,
         transparent 100%);
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.25s ease;
+    transition: opacity 0.2s ease;
     transform: translate(-50%, -50%);
     left: var(--mouse-x);
     top: var(--mouse-y);
     z-index: 0;
-    will-change: transform;
+    will-change: left, top;
     border-radius: 50%;
-    filter: blur(20px);
+    filter: blur(15px);
 }
 
 .footer-subscribe:hover::after {
