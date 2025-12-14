@@ -7,5 +7,10 @@ from tkinter import *
 root=Tk()
 root.title("Use of RadioBoxes in GUI python Program")
 root.minsize(1280,720)
-text1=Label(root,text='This program will teach you how to use radioboxes')
-
+option=IntVar()
+text1=Label(root,text='Want to exit this program?').pack()
+rad1=Radiobutton(root,text='Yes, leave',variable=option,value=1)
+rad1.pack()
+rad2=Radiobutton(root,text='No, stay',variable=option,value=2)
+rad2.pack()
+root.mainloop()

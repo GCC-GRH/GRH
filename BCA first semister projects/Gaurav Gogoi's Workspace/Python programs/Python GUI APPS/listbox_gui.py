@@ -1,0 +1,21 @@
+# What is a listbox?
+# It displays a list of items from which a user can select one or more
+from tkinter import *
+program_body=Tk()
+program_body.title('Listbox usage in Python Program')
+program_body.minsize(800,600)
+textview1=Label(program_body,text='This program demonstrates how listboxes works in a graphical python program')
+textview1.pack()
+listbox1=Listbox(program_body)
+listbox1.insert(1,'C Programming')
+listbox1.insert(2,'C++')
+listbox1.insert(3,'MySQL')
+listbox1.insert(4,'Python')
+listbox1.insert(5,'HTML')
+listbox1.insert(6,'MongoDb')
+listbox1.insert(7,'NoSql')
+listbox1.insert(8,'Boolean Algebra')
+listbox1.insert(9,'Flutter')
+listbox1.insert(10,'Javascript')
+listbox1.pack()
+program_body.mainloop()
