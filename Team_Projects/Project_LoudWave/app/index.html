@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Mobile App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="welcome-text">Welcome, <span id="username">User</span></div>
+            <div class="profile-icon" id="profile-icon"></div>
+        </div>
+
+        <div class="content">
+            <!-- PC Section -->
+            <div id="pc-section" class="section active">
+                <div class="card">
+                    <h3>My Devices</h3>
+                    <p>Connect to your available servers</p>
+                    <span class="status-badge">1 Available</span>
+                </div>
+                
+                <div class="grid" id="pc-grid">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+
+            <!-- Server Section -->
+            <div id="server-section" class="section">
+                <div id="server-list" class="server-list">
+                    <!-- Dynamically populated -->
+                </div>
+
+                <div id="server-detail" class="expanded-view">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settings-section" class="section">
+                <div class="card">
+                    <div class="settings-profile-card">
+                        <div class="profile-icon large"></div>
+                        <div class="profile-name" id="settings-username">User</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="settings-list">
+                        <div class="settings-item">
+                            <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                            <span class="settings-text">Display</span>
+                            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+
+                        <div class="settings-item">
+                            <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            </svg>
+                            <span class="settings-text">Notifications</span>
+                            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+
+                        <div class="settings-item">
+                            <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <span class="settings-text">Privacy & Security</span>
+                            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+
+                        <div class="settings-item">
+                            <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 16v-4"></path>
+                                <path d="M12 8h.01"></path>
+                            </svg>
+                            <span class="settings-text">About</span>
+                            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="logout-btn" onclick="openLogoutDialog()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <div class="nav-indicator"></div>
+        <div class="nav-item active" data-section="pc-section">
+            <svg class="nav-icon" viewBox="0 0 24 24">
+                <rect x="2" y="3" width="20" height="14" rx="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
+            <span class="nav-label">PC</span>
+        </div>
+
+        <div class="nav-item" data-section="server-section">
+            <svg class="nav-icon" viewBox="0 0 24 24">
+                <rect x="2" y="2" width="20" height="8" rx="2" />
+                <rect x="2" y="14" width="20" height="8" rx="2" />
+                <line x1="6" y1="6" x2="6.01" y2="6" />
+                <line x1="6" y1="18" x2="6.01" y2="18" />
+            </svg>
+            <span class="nav-label">Server</span>
+        </div>
+
+        <div class="nav-item" data-section="settings-section">
+            <svg class="nav-icon" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="3" />
+                <path d="M12 1v6m0 6v6m5.656-14.657l-4.243 4.243m-2.828 2.828l-4.243 4.243m12.728 0l-4.243-4.243m-2.828-2.828L1.343 1.343M23 12h-6m-6 0H1" />
+            </svg>
+            <span class="nav-label">Settings</span>
+        </div>
+    </nav>
+
+    <!-- Terminate Dialog -->
+    <div class="dialog-overlay" id="terminateDialog">
+        <div class="dialog">
+            <div class="dialog-icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                    <line x1="12" y1="9" x2="12" y2="13"></line>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+            </div>
+            <h3>Terminate Server?</h3>
+            <p>Are you sure you want to terminate this server? This action cannot be undone.</p>
+            <div class="dialog-buttons">
+                <button class="dialog-btn cancel" onclick="closeTerminateDialog()">No</button>
+                <button class="dialog-btn confirm" onclick="confirmTerminate()">Yes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Task Manager Dialog -->
+    <div class="dialog-overlay" id="taskManagerDialog">
+        <div class="dialog task-manager-dialog">
+            <div class="dialog-header">
+                <h3>Task Manager</h3>
+                <div class="close-btn" onclick="closeTaskManager()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="ram-overview">
+                <div class="ram-label">RAM Usage</div>
+                <div class="ram-value" id="totalRamUsage">12.4 GB / 16 GB</div>
+                <div class="ram-bar">
+                    <div class="ram-bar-fill" id="totalRamBar" style="width: 77.5%"></div>
+                </div>
+            </div>
+
+            <div class="processes-header">Running Processes</div>
+            
+            <div class="processes-list" id="processesList"></div>
+
+            <div class="dialog-footer">
+                <button class="end-process-btn" id="endProcessBtn" disabled onclick="endSelectedProcesses()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                    </svg>
+                    <span>End Selected Processes</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Dialog -->
+    <div class="dialog-overlay" id="logoutDialog">
+        <div class="dialog">
+            <div class="dialog-icon" style="background: rgba(234, 102, 102, 0.2);">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: #ea6666;">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+            </div>
+            <h3>Logout</h3>
+            <p>Are you sure you want to logout? You'll need to sign in again to access your account.</p>
+            <div class="dialog-buttons">
+                <button class="dialog-btn cancel" onclick="closeLogoutDialog()">Cancel</button>
+                <button class="dialog-btn confirm" onclick="confirmLogout()">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
