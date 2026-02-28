@@ -1,0 +1,7 @@
+Time Complexity:
+- smallest_greatest_array_using_cpp_lib.cpp: O(n)
+- swapping_two_ptr_approach.cpp: O(1) per swap, O(n) for full pass
+
+Programs:
+- smallest_greatest_array_using_cpp_lib.cpp
+- swapping_two_ptr_approach.cpp

@@ -1,0 +1,5 @@
+Time Complexity:
+- linked_list.cpp: (Depends on operation, e.g., O(1) for insertion at head, O(n) for search)
+
+Programs:
+- linked_list.cpp

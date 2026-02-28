@@ -1,0 +1,9 @@
+Time Complexity:
+- for-each-loop.cpp: O(n)
+- single_number-problem.cpp: O(n)
+- vector.cpp: O(1) for access, O(n) for traversal
+
+Programs:
+- for-each-loop.cpp
+- single_number-problem.cpp
+- vector.cpp

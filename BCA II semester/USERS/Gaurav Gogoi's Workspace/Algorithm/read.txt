@@ -1,0 +1,9 @@
+Time Complexity:
+- kadane-algorithm-maximum-subarray-sum.cpp: O(n)
+- maximum-subarray-sum-BF.cpp: O(n^2)
+- maximum-subarrays.cpp: (Please specify if needed)
+
+Programs:
+- kadane-algorithm-maximum-subarray-sum.cpp
+- maximum-subarray-sum-BF.cpp
+- maximum-subarrays.cpp

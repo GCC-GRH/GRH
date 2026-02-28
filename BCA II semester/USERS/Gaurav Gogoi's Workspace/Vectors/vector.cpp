@@ -25,4 +25,6 @@ int main(){
     4. vector.front();
     5. vector.back();
     6. vector.at();
+    7. vector.capacity();
 */
+// Vectors are generally passed by value automatically in C++ functions as arguements. Therefore, in order to pass them as reference, we need to use "&" operator.
