@@ -10,18 +10,21 @@ int main(){
     cout<<"Enter a target value: ";
     cin>>target;
     cout<<endl;
-    while(head<=tail){
-        if(target==arr[mid]){
+    while(head <= tail){
+        if(target == arr[mid]){
             cout<<"Element found at idx: "<<mid;
             break;
-        }else if(target<arr[mid]){
-            tail=mid-1;
-        }else if(target>arr[mid]){
-            head=mid+1;
+        }else if(target < arr[mid]){
+            tail = mid - 1;
+        }else if(target > arr[mid]){
+            head = mid + 1;
         }
-        mid = (head + tail)/2;
+        mid = head + (tail - head)/2; 
     }
-    if(target!=arr[mid]){
+    if(target != arr[mid]){
     cout<<"Target element not found!";
     }
 }
+
+// Binary search can only be applied on sorted array. 
+// Time-complexity : O(logn)
