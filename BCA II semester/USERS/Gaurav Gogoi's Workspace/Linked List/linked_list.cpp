@@ -74,7 +74,28 @@ class List{
           }
         };
         
-        
+        void insert(int val, int pos){
+          if(pos < 0){
+            cout<< " Invalid position!!";
+            return;
+          }
+          if(pos == 0){
+            push_head(val);
+            return;
+          }
+          Node* temp = head;
+          if(temp==NULL){
+            cout<<"Empty linked list to insert at specific position"<<endl;
+          }
+
+          for(int i = 0; i < pos - 1;i++){
+            temp = temp -> next;
+          }
+          Node* newNode = new Node(val);
+          newNode->next = temp->next;
+          temp->next = newNode; 
+          
+        }
         
         
         void printl(){
@@ -122,7 +143,9 @@ cin>>opt;
 (opt==0)? ll.push_head(val) : ll.push_tail(val);
 }
 }
+ll.insert(4,1);
 ll.printl();
+
 }
 
 
