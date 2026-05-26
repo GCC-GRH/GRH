@@ -63,15 +63,35 @@ class tree{
         
 
     };
+
+    void levelOrder(tnode* n){
+        queue <tnode*> indices;
+        if(n == nullptr){
+            return;
+        }
+        indices.push(n);
+        while(indices.size() > 0){
+        tnode* nd = indices.front();
+        indices.pop();
+        cout<<nd->data<<"\t";
+        if(nd->left != nullptr){
+            indices.push(nd->left);
+        };
+        if(nd->right != nullptr){
+            indices.push(nd->right);
+        };
+    }
+    }
 };
 
 int main(){
     int vertices[] = {1,2,-1,-1,3,4,-1,-1,5,-1,-1};
     tree t1;
-    t1.buildTree(vertices);
-    // t1.preOrder(t1.root);
-    // t1.postOrder(t1.root);
-    t1.inOrder(t1.root);
+       t1.buildTree(vertices);
+       t1.preOrder(t1.root);
+       t1.postOrder(t1.root);
+       t1.inOrder(t1.root);
+       t1.levelOrder(t1.root);
 
 }
 
