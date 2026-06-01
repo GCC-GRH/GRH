@@ -1,0 +1,130 @@
+name: Ubuntu Dual Access (RDP + VNC Optimized)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup-dual-desktop:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Free Up Disk Space
+        run: |
+          df -h
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/hostedtoolcache
+          df -h
+
+      - name: Create 4GB Swap
+        run: |
+          echo "Disabling default swap to prevent lock errors..."
+          sudo swapoff -a || true
+          sudo rm -f /swapfile || true
+          
+          echo "Allocating fresh 4GB swap..."
+          sudo fallocate -l 4G /swapfile
+          sudo chmod 600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
+          free -h
+
+      - name: Install XFCE4, XRDP, and TightVNC
+        run: |
+          sudo apt update
+
+          sudo DEBIAN_FRONTEND=noninteractive apt install -y \
+            xfce4 \
+            xfce4-goodies \
+            ubuntu-wallpapers \
+            xrdp \
+            tightvncserver \
+            dbus-x11 \
+            jq \
+            falkon \
+            netcat-openbsd
+
+      - name: Optimize for Low Mobile Data
+        run: |
+          # 1. Force XRDP to use 16-bit color
+          sudo sed -i 's/max_bpp=32/max_bpp=16/g' /etc/xrdp/xrdp.ini
+          sudo sed -i 's/xserverbpp=24/xserverbpp=16/g' /etc/xrdp/xrdp.ini
+          
+          # 2. Disable XFCE4 visual effects to reduce screen redraws
+          sudo -u runner bash -c 'mkdir -p ~/.config/xfce4/xfconf/xfce-perchannel-xml/'
+          sudo -u runner bash -c 'cat > ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml << XEOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <channel name="xfwm4" version="1.0">
+            <property name="general" type="empty">
+              <property name="use_compositing" type="bool" value="false"/>
+            </property>
+          </channel>
+          XEOF'
+
+      - name: Configure XRDP and TightVNC
+        run: |
+          # --- RDP SETUP ---
+          echo "runner:P@ssw0rd!" | sudo chpasswd
+          sudo -u runner bash -c 'echo "xfce4-session" > ~/.xsession'
+          sudo adduser xrdp ssl-cert
+          sudo systemctl restart xrdp
+
+          # --- VNC SETUP ---
+          sudo -u runner bash <<'EOF'
+          mkdir -p ~/.vnc
+          echo "P@ssw0rd!" | vncpasswd -f > ~/.vnc/passwd
+          chmod 600 ~/.vnc/passwd
+
+          cat > ~/.vnc/xstartup <<'XEOF'
+          #!/bin/bash
+          unset SESSION_MANAGER
+          unset DBUS_SESSION_BUS_ADDRESS
+          xrdb $HOME/.Xresources
+          dbus-launch --exit-with-session startxfce4 &
+          XEOF
+          chmod +x ~/.vnc/xstartup
+          
+          # Start VNC with 16-bit depth to save mobile data
+          vncserver :1 -geometry 1280x720 -depth 16
+          EOF
+
+      - name: Copy Wallpapers
+        run: |
+          sudo mkdir -p /home/runner/Desktop
+          if [ -d /usr/share/backgrounds ]; then
+            sudo cp -r /usr/share/backgrounds /home/runner/Desktop/Wallpapers
+          fi
+          sudo chown -R runner:runner /home/runner/Desktop
+
+      - name: Start Tailscale
+        env:
+          TAILSCALE_AUTHKEY: ${{ secrets.TAILSCALE_AUTHKEY }}
+        run: |
+          curl -fsSL https://tailscale.com/install.sh | sh
+          sudo tailscale up --authkey=${TAILSCALE_AUTHKEY} --hostname=github-dual-runner
+
+      - name: Print Connection Details
+        run: |
+          TS_IP=$(tailscale ip -4)
+
+          echo ""
+          echo "=================================================="
+          echo "SERVER CONNECTION DETAILS"
+          echo "=================================================="
+          echo "--- MICROSOFT RDP APP ---"
+          echo "PC Name (Host): ${TS_IP}"
+          echo "Username: runner"
+          echo "Password: P@ssw0rd!"
+          echo ""
+          echo "--- VNC VIEWER APP ---"
+          echo "Host: ${TS_IP}:5901"
+          echo "Password: P@ssw0rd!"
+          echo "=================================================="
+
+      - name: Keep Runner Alive
+        run: |
+          echo "Runner active for 5 hours..."
+          sleep 18000
