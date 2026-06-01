@@ -1,0 +1,146 @@
+name: Ubuntu Dual Access (RDP + VNC Optimized)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup-dual-desktop:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Free Up Disk Space
+        run: |
+          df -h
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/hostedtoolcache
+          df -h
+
+      - name: Create 4GB Swap
+        run: |
+          echo "Disabling default swap to prevent lock errors..."
+          sudo swapoff -a || true
+          sudo rm -f /swapfile || true
+
+          echo "Allocating fresh 4GB swap..."
+          sudo fallocate -l 4G /swapfile
+          sudo chmod 600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
+          free -h
+
+      - name: Install XFCE4, XRDP, and TightVNC
+        run: |
+          sudo apt update
+
+          sudo DEBIAN_FRONTEND=noninteractive apt install -y \
+            xfce4 \
+            xfce4-goodies \
+            ubuntu-wallpapers \
+            xrdp \
+            tightvncserver \
+            dbus-x11 \
+            jq \
+            falkon \
+            netcat-openbsd \
+            openssh-client
+
+      - name: Optimize for Low Mobile Data
+        run: |
+          sudo sed -i 's/max_bpp=32/max_bpp=16/g' /etc/xrdp/xrdp.ini
+          sudo sed -i 's/xserverbpp=24/xserverbpp=16/g' /etc/xrdp/xrdp.ini
+
+          sudo -u runner bash -c 'mkdir -p ~/.config/xfce4/xfconf/xfce-perchannel-xml/'
+          sudo -u runner bash -c 'cat > ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml << XEOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <channel name="xfwm4" version="1.0">
+            <property name="general" type="empty">
+              <property name="use_compositing" type="bool" value="false"/>
+            </property>
+          </channel>
+          XEOF'
+
+      - name: Configure XRDP and TightVNC
+        run: |
+          echo "runner:P@ssw0rd!" | sudo chpasswd
+          sudo -u runner bash -c 'echo "xfce4-session" > ~/.xsession'
+          sudo adduser xrdp ssl-cert
+          sudo systemctl restart xrdp
+
+          sudo -u runner bash <<'EOF'
+          mkdir -p ~/.vnc
+          echo "P@ssw0rd!" | vncpasswd -f > ~/.vnc/passwd
+          chmod 600 ~/.vnc/passwd
+
+          cat > ~/.vnc/xstartup <<'XEOF'
+          #!/bin/bash
+          unset SESSION_MANAGER
+          unset DBUS_SESSION_BUS_ADDRESS
+          xrdb $HOME/.Xresources
+          dbus-launch --exit-with-session startxfce4 &
+          XEOF
+          chmod +x ~/.vnc/xstartup
+
+          vncserver :1 -geometry 1280x720 -depth 16
+          EOF
+
+      - name: Copy Wallpapers
+        run: |
+          sudo mkdir -p /home/runner/Desktop
+          if [ -d /usr/share/backgrounds ]; then
+            sudo cp -r /usr/share/backgrounds /home/runner/Desktop/Wallpapers
+          fi
+          sudo chown -R runner:runner /home/runner/Desktop
+
+      - name: Start Pinggy Tunnels
+        run: |
+          ssh -p 443 \
+            -o StrictHostKeyChecking=no \
+            -o ServerAliveInterval=30 \
+            -R0:localhost:3389 tcp@a.pinggy.io > rdp_tunnel.log 2>&1 &
+
+          ssh -p 443 \
+            -o StrictHostKeyChecking=no \
+            -o ServerAliveInterval=30 \
+            -R0:localhost:5901 tcp@a.pinggy.io > vnc_tunnel.log 2>&1 &
+
+          sleep 20
+
+      - name: Print Connection Details
+        run: |
+          echo ""
+          echo "=================================================="
+          echo "SERVER CONNECTION DETAILS"
+          echo "=================================================="
+
+          RDP_ADDR=$(grep -oE 'tcp://[^ ]+' rdp_tunnel.log | head -1 || true)
+          VNC_ADDR=$(grep -oE 'tcp://[^ ]+' vnc_tunnel.log | head -1 || true)
+
+          echo "--- MICROSOFT RDP APP ---"
+          echo "Host: ${RDP_ADDR}"
+          echo "Username: runner"
+          echo "Password: P@ssw0rd!"
+          echo ""
+
+          echo "--- VNC VIEWER APP ---"
+          echo "Host: ${VNC_ADDR}"
+          echo "Password: P@ssw0rd!"
+          echo ""
+
+          echo "=================================================="
+
+          echo ""
+          echo "===== RDP Tunnel Log ====="
+          cat rdp_tunnel.log || true
+
+          echo ""
+          echo "===== VNC Tunnel Log ====="
+          cat vnc_tunnel.log || true
+
+      - name: Keep Runner Alive
+        run: |
+          echo "Runner active for 5 hours..."
+          sleep 18000
