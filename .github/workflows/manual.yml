@@ -24,7 +24,7 @@ jobs:
           echo "Disabling default swap to prevent lock errors..."
           sudo swapoff -a || true
           sudo rm -f /swapfile || true
-          
+
           echo "Allocating fresh 4GB swap..."
           sudo fallocate -l 4G /swapfile
           sudo chmod 600 /swapfile
@@ -45,15 +45,14 @@ jobs:
             dbus-x11 \
             jq \
             falkon \
-            netcat-openbsd
+            netcat-openbsd \
+            openssh-client
 
       - name: Optimize for Low Mobile Data
         run: |
-          # 1. Force XRDP to use 16-bit color
           sudo sed -i 's/max_bpp=32/max_bpp=16/g' /etc/xrdp/xrdp.ini
           sudo sed -i 's/xserverbpp=24/xserverbpp=16/g' /etc/xrdp/xrdp.ini
-          
-          # 2. Disable XFCE4 visual effects to reduce screen redraws
+
           sudo -u runner bash -c 'mkdir -p ~/.config/xfce4/xfconf/xfce-perchannel-xml/'
           sudo -u runner bash -c 'cat > ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml << XEOF
           <?xml version="1.0" encoding="UTF-8"?>
@@ -66,13 +65,11 @@ jobs:
 
       - name: Configure XRDP and TightVNC
         run: |
-          # --- RDP SETUP ---
           echo "runner:P@ssw0rd!" | sudo chpasswd
           sudo -u runner bash -c 'echo "xfce4-session" > ~/.xsession'
           sudo adduser xrdp ssl-cert
           sudo systemctl restart xrdp
 
-          # --- VNC SETUP ---
           sudo -u runner bash <<'EOF'
           mkdir -p ~/.vnc
           echo "P@ssw0rd!" | vncpasswd -f > ~/.vnc/passwd
@@ -86,8 +83,7 @@ jobs:
           dbus-launch --exit-with-session startxfce4 &
           XEOF
           chmod +x ~/.vnc/xstartup
-          
-          # Start VNC with 16-bit depth to save mobile data
+
           vncserver :1 -geometry 1280x720 -depth 16
           EOF
 
@@ -99,30 +95,50 @@ jobs:
           fi
           sudo chown -R runner:runner /home/runner/Desktop
 
-      - name: Start Tailscale
-        env:
-          TAILSCALE_AUTHKEY: ${{ secrets.TAILSCALE_AUTHKEY }}
+      - name: Start Pinggy Tunnels
         run: |
-          curl -fsSL https://tailscale.com/install.sh | sh
-          sudo tailscale up --authkey=${TAILSCALE_AUTHKEY} --hostname=github-dual-runner
+          ssh -p 443 \
+            -o StrictHostKeyChecking=no \
+            -o ServerAliveInterval=30 \
+            -R0:localhost:3389 tcp@a.pinggy.io > rdp_tunnel.log 2>&1 &
+
+          ssh -p 443 \
+            -o StrictHostKeyChecking=no \
+            -o ServerAliveInterval=30 \
+            -R0:localhost:5901 tcp@a.pinggy.io > vnc_tunnel.log 2>&1 &
+
+          sleep 20
 
       - name: Print Connection Details
         run: |
-          TS_IP=$(tailscale ip -4)
-
           echo ""
           echo "=================================================="
           echo "SERVER CONNECTION DETAILS"
           echo "=================================================="
+
+          RDP_ADDR=$(grep -oE 'tcp://[^ ]+' rdp_tunnel.log | head -1 || true)
+          VNC_ADDR=$(grep -oE 'tcp://[^ ]+' vnc_tunnel.log | head -1 || true)
+
           echo "--- MICROSOFT RDP APP ---"
-          echo "PC Name (Host): ${TS_IP}"
+          echo "Host: ${RDP_ADDR}"
           echo "Username: runner"
           echo "Password: P@ssw0rd!"
           echo ""
+
           echo "--- VNC VIEWER APP ---"
-          echo "Host: ${TS_IP}:5901"
+          echo "Host: ${VNC_ADDR}"
           echo "Password: P@ssw0rd!"
+          echo ""
+
           echo "=================================================="
+
+          echo ""
+          echo "===== RDP Tunnel Log ====="
+          cat rdp_tunnel.log || true
+
+          echo ""
+          echo "===== VNC Tunnel Log ====="
+          cat vnc_tunnel.log || true
 
       - name: Keep Runner Alive
         run: |
