@@ -1,6 +1,7 @@
 #include<iostream>
 #include<list>
 #include<queue>
+#include<vector>
 using namespace std;
 
 class graph{
@@ -41,21 +42,6 @@ class graph{
     }
     return false;
 }
-
-    void primst(){
-        bool* mst_visited = new bool[vertices];
-        for(int i = 0; i<vertices; i++){
-            mst_visited[i] = false;
-        };
-        priority_queue <pair<int,int>> pq;
-        pq.push({0,0});
-        while(pq.size() > 0){
-            pair<int,int> p = pq.top();
-            int wt = p.second;
-        }
-
-        delete[] mst_visited;
-    }
     public:
     graph(int v){
         vertices = v;
@@ -153,6 +139,37 @@ class graph{
         delete[] parent;
         cout<<"No cycle detected within the graph"<<endl;
     }
+
+    void primst(){
+        bool* mst_visited = new bool[vertices];
+        for(int i = 0; i<vertices; i++){
+            mst_visited[i] = false;
+        };
+        priority_queue < pair<int,int>,vector<pair<int,int>>, greater<pair<int,int>> >pq;
+        int mstcost = 0;
+        pq.push({0,0});
+        while(pq.size() > 0){
+            pair<int,int> p = pq.top();
+            int wt = p.second;
+            int u = p.first;
+            pq.pop();
+
+            if(!mst_visited[u]){
+                mst_visited[u] = true;
+                mstcost +=wt;
+                for(pair <int,int> i : weight[u]){
+                    int v = i.first;
+                    int w = i.second;
+                    if(mst_visited[v]) continue;
+
+                    pq.push({v,w});
+                }
+            }
+        }
+        cout<<endl<<"The minimum spanning tree is bearing COST : "<<mstcost;
+        delete[] mst_visited;
+        return;
+    }
     
     ~graph(){ // avoiding memory leak
         delete[] l;
@@ -164,7 +181,7 @@ class graph{
 
 
 int main(){
-    graph g(5);
+    graph g(4);
     //Unweighted graph edges
     // g.addEdge(0,1);
     // g.addEdge(0,2);
@@ -173,15 +190,19 @@ int main(){
     // g.addEdge(3,4);
 
     // Weighted graph edges
-    g.addWedge(0, 1, 5);
-    g.addWedge(0, 2, 3);
-    g.addWedge(0, 3, 7);
-    g.addWedge(1, 2, 2);
-    g.addWedge(1, 4, 6);
-    g.addWedge(2, 3, 4);
-    g.addWedge(3, 4, 1);
+    g.addWedge(0, 1, 10); // u, v , wt
+    g.addWedge(1, 0, 10);
+    g.addWedge(0, 3, 30);
+    g.addWedge(3, 0, 30);
+    g.addWedge(0, 2, 15);
+    g.addWedge(2, 0, 15);
+    g.addWedge(1, 3, 40);
+    g.addWedge(3, 1, 40);
+    g.addWedge(2, 3, 50);
+    g.addWedge(3, 2, 50);
     g.printg();
     // g.bfs();
     // g.dfs();
     // g.cycle();
+    g.primst();
 }
