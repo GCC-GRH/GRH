@@ -5,6 +5,7 @@ class cstack{
     int* arr;
     int idx = -1;
     int s;
+    int elm = 0;
     public:
     cstack(int size){
         arr = new int[size];
@@ -12,27 +13,27 @@ class cstack{
     }
 
     void push(int val){
-        if(idx+1 == s){
-            idx = 0;
+        if(isfull()){
+            idx = (idx + 1) % s;
             arr[idx] = val;
             return;
         }
-
+        elm++;
         idx++;
         arr[idx] = val;
     }
 
     void pop(){
-    if(idx == -1){
+    if(isempty()){
         cout<<"Cannot pop and empty stack"<<endl;
         return;
     }
-
-    idx--;
+    elm--;
+    idx = (idx - 1 + s) % s;
 }
 
 int seek(){
-    if(idx == -1){
+    if(isempty()){
         cout<<"Empty stack!"<<endl;
         return -1;
     }
@@ -47,10 +48,25 @@ void printstk(){
 }
 
 bool isempty(){
-    return idx == -1;
+    return elm == 0;
 }
 
+void track(){
+    cout<<elm<< " out of " <<s<<" elements are stored" <<endl;
+
+}
+
+bool isfull(){
+    if(isempty()) return false;
+
+    if(elm == s){
+        return true;
+    }
+    return false;
+}
 };
+
+
 
 int main(){
     cstack s(5);
@@ -67,6 +83,7 @@ int main(){
     s.push(9);
     s.push(10);
     s.printstk();
+    s.track();
 
     
 }
