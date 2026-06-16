@@ -6,6 +6,7 @@ class queue{
     int idx = -1;
     int capacity = 1;
     int front = 0;
+    int rear = -1;
     public:
     queue(){
         arr = new int[capacity];
@@ -21,8 +22,12 @@ class queue{
             delete[] arr;
             arr = temp;
         }
+        if(rear == -1){
         idx++;
         arr[idx] = val;
+        }else{
+            
+        }
     }
 
     void pop(){
@@ -31,6 +36,8 @@ class queue{
             return;
         }
         front++;
+        rear = front;
+        
     }
 
     int seek(){

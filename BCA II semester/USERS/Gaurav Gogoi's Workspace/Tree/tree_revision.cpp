@@ -28,8 +28,10 @@ class tree{
     newNode->left = buildTree(nodes);
     newNode->right = buildTree(nodes);
     root = newNode;
-    return newNode;
+    return root;
     };
+
+
     void preOrder(tnode* n){
         if(n == nullptr){
             if(build_state == 0){
